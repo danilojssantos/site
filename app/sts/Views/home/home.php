@@ -1,4 +1,4 @@
 <?php
 
 
-echo "acessou a home";
+//echo "acessou a home";
