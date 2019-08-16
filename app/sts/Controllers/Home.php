@@ -8,11 +8,13 @@ if(!defined('URL')){
 
 class Home 
 {
+    private $Dados;
     public function index()
     {
+
        $home = new \Sts\Models\StsHome(); 
-       $home->index();
-       $carregarView = new \Core\ConfigView("sts/Views/home/home");
+       $this->Dados = $home->index();
+       $carregarView = new \Core\ConfigView("sts/Views/home/home", $this->Dados);
        $carregarView->renderizar();
     }
 
