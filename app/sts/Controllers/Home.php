@@ -12,8 +12,8 @@ class Home
     public function index()
     {
 
-       $home = new \Sts\Models\StsHome(); 
-       $this->Dados['sts_carousels'] = $home->index();
+       $home = new \Sts\Models\StsCarousel(); 
+       $this->Dados['sts_carousels'] = $home->listar();
        $carregarView = new \Core\ConfigView("sts/Views/home/home", $this->Dados);
        $carregarView->renderizar();
     }

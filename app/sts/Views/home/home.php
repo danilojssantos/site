@@ -28,7 +28,14 @@ if (!defined('URL')) {
                     echo 'active';
                 }
                 ?>">
-                    <img class="first-slide img-fluid" src="<?php echo URL . '/assets/imagens/carousel/' . $id . '/' . $imagem; ?>" alt="Primeiro conteúdo">
+                    <img class="first-slide img-fluid" src="<?php echo URL . '/assets/imagens/carousel/' . $id . '/' . $imagem; ?>" alt="<?php echo $titulo; ?>">
+                    <div class="container">
+                        <div class="carousel-caption <?php echo $posicao_text; ?>">
+                            <h1 class="d-none d-md-block"><?php echo $titulo; ?></h1>
+                            <p class="d-none d-md-block"><?php echo $descricao; ?></p>
+                            <p class="d-none d-md-block"><a class="btn btn-lg btn-<?php echo $cor; ?>" href="<?php echo $link; ?>" role="button"><?php echo $titulo_botao; ?></a></p>
+                        </div>
+                    </div>
                 </div>
                 <?php
                 $cont_slide++;
