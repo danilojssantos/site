@@ -33,7 +33,7 @@ class StsRead  extends StsConn
 
             $this->Select = "SELECT * FROM {$Tabela} {$Termos}";
 
-            echo "{$this->Select}";
+           // echo "{$this->Select}";
             $this->exeInstrucao();
     }
     //leitura mais dinamica atras por exemplo so nome o eo id 
