@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo URL; ?>assets/css/ionicons.min.css">
 	<link rel="stylesheet" href="<?php echo URL; ?>assets/css/personalizado.css">
+    <script src="https://use.fontawesome.com/15a91c8013.js"></script>
     <title>DaniloJoaquim</title>
    
 </head>
