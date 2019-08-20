@@ -50,7 +50,7 @@ if (!defined('URL')) {
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-
+        </div>    
         <?php extract($this->Dados['sts_servicos'][0]); ?>
         <div class="jumbotron servicos">
             <div class="container">
