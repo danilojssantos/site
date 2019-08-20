@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 20-Ago-2019 às 00:56
--- Versão do servidor: 5.7.23
--- versão do PHP: 7.2.10
+-- Host: 127.0.0.1
+-- Tempo de geração: 20-Ago-2019 às 22:09
+-- Versão do servidor: 10.3.16-MariaDB
+-- versão do PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `danilo`
+-- Banco de dados: `danilo`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +28,13 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `adms_cors`
 --
 
-DROP TABLE IF EXISTS `adms_cors`;
-CREATE TABLE IF NOT EXISTS `adms_cors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adms_cors` (
+  `id` int(11) NOT NULL,
   `nome` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `cor` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `modified` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `adms_cors`
@@ -58,9 +56,8 @@ INSERT INTO `adms_cors` (`id`, `nome`, `cor`, `created`, `modified`) VALUES
 -- Estrutura da tabela `sts_carousels`
 --
 
-DROP TABLE IF EXISTS `sts_carousels`;
-CREATE TABLE IF NOT EXISTS `sts_carousels` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sts_carousels` (
+  `id` int(11) NOT NULL,
   `nome` varchar(220) COLLATE utf8_unicode_ci NOT NULL,
   `imagem` varchar(220) COLLATE utf8_unicode_ci NOT NULL,
   `titulo` varchar(220) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -72,9 +69,8 @@ CREATE TABLE IF NOT EXISTS `sts_carousels` (
   `adms_cor_id` int(11) DEFAULT NULL,
   `adms_situacoe_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `modified` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `sts_carousels`
@@ -91,9 +87,8 @@ INSERT INTO `sts_carousels` (`id`, `nome`, `imagem`, `titulo`, `descricao`, `pos
 -- Estrutura da tabela `sts_servicos`
 --
 
-DROP TABLE IF EXISTS `sts_servicos`;
-CREATE TABLE IF NOT EXISTS `sts_servicos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sts_servicos` (
+  `id` int(11) NOT NULL,
   `titulo` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `icone_um` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `nome_um` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
@@ -105,16 +100,93 @@ CREATE TABLE IF NOT EXISTS `sts_servicos` (
   `nome_tres` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `descricao_tres` varchar(220) COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `modified` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `sts_servicos`
 --
 
 INSERT INTO `sts_servicos` (`id`, `titulo`, `icone_um`, `nome_um`, `descricao_um`, `icone_dois`, `nome_dois`, `descricao_dois`, `icone_tres`, `nome_tres`, `descricao_tres`, `created`, `modified`) VALUES
-(1, 'ServiÃ§os', 'fa fa-code', 'ServiÃ§os um', 'This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.', 'fa fa-users', 'ServiÃ§os dois', 'This card has supporting text below as a natural lead-in to additional content.', 'fa fa-graduation-cap', 'ServiÃ§os tres', 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.', '2018-05-23 00:00:00', NULL);
+(1, 'ServiÃ§os', 'fa fa-users', 'ServiÃ§os um', 'This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.', 'fa fa-graduation-cap', 'ServiÃ§os dois', 'This card has supporting text below as a natural lead-in to additional content.', 'fa fa-code', 'ServiÃ§os tres', 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.', '2018-05-23 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sts_videos`
+--
+
+CREATE TABLE `sts_videos` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  `descricao` varchar(220) COLLATE utf8_unicode_ci NOT NULL,
+  `video` varchar(220) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `sts_videos`
+--
+
+INSERT INTO `sts_videos` (`id`, `titulo`, `descricao`, `video`, `created`, `modified`) VALUES
+(1, 'VÃ­deo', 'This is a wider card with supporting text below as a natural lead-in to additional content.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/vpp-DP1JTLk\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', '2018-05-23 00:00:00', NULL);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `adms_cors`
+--
+ALTER TABLE `adms_cors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `sts_carousels`
+--
+ALTER TABLE `sts_carousels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `sts_servicos`
+--
+ALTER TABLE `sts_servicos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `sts_videos`
+--
+ALTER TABLE `sts_videos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `adms_cors`
+--
+ALTER TABLE `adms_cors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `sts_carousels`
+--
+ALTER TABLE `sts_carousels`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `sts_servicos`
+--
+ALTER TABLE `sts_servicos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `sts_videos`
+--
+ALTER TABLE `sts_videos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
