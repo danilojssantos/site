@@ -25,7 +25,10 @@ class Home
         $listar_vid = new \Sts\Models\StsVideo();
         $this->Dados['sts_videos'] = $listar_vid->listar();
         
-
+        //listar artigos recente na home 
+        $listar_art_home = new \Sts\Models\StsArtHome();
+        $this->Dados['sts_artigos']= $listar_art_home->listarArtHome();
+        
        //carrega a pagina 
         $carregarView = new \Core\ConfigView("sts/Views/home/home", $this->Dados);
         $carregarView->renderizar();
