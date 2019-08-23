@@ -13,8 +13,8 @@ class SobreDanilo
     {
         //listar na pagina 
 
-        $listarSonDan = new \Sts\Models\StsSobreDan();
-        $this->Dados['sts_sobs_emp'] = $listarSonDan->listarSobDan();
+        $listarSobDan = new \Sts\Models\StsSobreDan();
+        $this->Dados['sts_sobs_emps'] = $listarSobDan->listarSobDan();
 
         $carregarView = new \Core\ConfigView("sts/Views/sobredanilo/sobredanilo",$this->Dados);
         $carregarView->renderizar();
