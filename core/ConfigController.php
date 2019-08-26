@@ -34,8 +34,8 @@ class ConfigController {
                 $this->UrlParamentro = null;
             }
 
-            echo "{$this->Url} <br>";
-            echo "Controller: {$this->UrlController}  <br>";
+           // echo "{$this->Url} <br>";
+           // echo "Controller: {$this->UrlController}  <br>";
             //  caso nao tenha paramentro entra else aonde vai ter valores fixos
         }else{
             $this->UrlController = CONTROLER;
