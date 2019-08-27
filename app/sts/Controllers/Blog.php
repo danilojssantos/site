@@ -17,7 +17,7 @@ class Blog
         $this->PageId = $this->PageId ? $this->PageId : 1;
         // echo "<br><br><br> {$this->PageId}";
         $listar_art = new \Sts\Models\StsBlog();
-        $this->Dados['artigos'] = $listar_art->ListarArtigos($this->PageId);
+        $this->Dados['artigos'] = $listar_art->listarArtigos($this->PageId);
 
         //var_dump( $this->Dados['artigos']);
         $carregarView = new \Core\ConfigView("sts/Views/blog/blog", $this->Dados);

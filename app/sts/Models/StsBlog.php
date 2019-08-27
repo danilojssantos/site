@@ -6,15 +6,20 @@ if (!defined('URL')) {
     exit();
 }
 
-
-
 class StsBlog
 {
 
     private $Resutado;
+    private $PageId;
 
-    public function ListarArtigos()
+    public function listarArtigos($PageId = null)
     {
+        $this->PageId = (int) $PageId;
+        $paginacao = new \Sts\Models\helper\StsPaginacao(URL . 'blog');
+        //depois lembrar de troca 3 por 5
+        $paginacao->condicao($  $this->PageId, 3);
+
+
         $listar = new \Sts\Models\helper\StsRead();
         $listar->fullRead('SELECT id, titulo, descricao, imagem, slug FROM sts_artigos 
         WHERE adms_sit_id =:adms_sit_id
