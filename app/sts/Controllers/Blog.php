@@ -18,6 +18,8 @@ class Blog
         // echo "<br><br><br> {$this->PageId}";
         $listar_art = new \Sts\Models\StsBlog();
         $this->Dados['artigos'] = $listar_art->listarArtigos($this->PageId);
+        $this->Dados['paginacao'] = $listar_art->getResultadoPg();
+        
 
         //var_dump( $this->Dados['artigos']);
         $carregarView = new \Core\ConfigView("sts/Views/blog/blog", $this->Dados);
