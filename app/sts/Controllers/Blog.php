@@ -1,5 +1,8 @@
 <?php
 namespace Sts\Controllers;
+
+use Sts\Models\StsArtRecente;
+
 if(!defined('URL')){
     header("Location: /");
     exit();
@@ -20,6 +23,10 @@ class Blog
         $this->Dados['artigos'] = $listar_art->listarArtigos($this->PageId);
         $this->Dados['paginacao'] = $listar_art->getResultadoPg();
         
+        //listar artigos recentes 
+
+        $listarArtRecente = new \Sts\Models\StsArtRecente();
+        $this->Dados['artRecente'] = $listarArtRecente->listarArtRecente();
 
         //var_dump( $this->Dados['artigos']);
         $carregarView = new \Core\ConfigView("sts/Views/blog/blog", $this->Dados);

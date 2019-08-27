@@ -47,15 +47,16 @@ if (!defined('URL')) {
                     <div class="p-3">
                         <h4 class="font-italic">Recentes</h4>
                         <ol class="list-unstyled mb-0">
-                            <li><a href="#">Artigo 1</a></li>
-                            <li><a href="#">Artigo 2</a></li>
-                            <li><a href="#">Artigo 3</a></li>
-                            <li><a href="#">Artigo 4</a></li>
-                            <li><a href="#">Artigo 5</a></li>
-                            <li><a href="#">Artigo 6</a></li>
-                            <li><a href="#">Artigo 7</a></li>
-                            <li><a href="#">Artigo 8</a></li>
-                            <li><a href="#">Artigo 9</a></li>
+
+                        <?php
+                            foreach ($this->Dados['artRecente'] as $artigoRec) {
+                                extract($artigoRec);
+                                echo "<li><a href='".URL."artigo/$slug'>$titulo</a></li>";
+                            
+                            }
+                        ?>
+                            
+                            
                         </ol>
                     </div>
 
