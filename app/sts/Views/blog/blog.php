@@ -12,6 +12,9 @@ if (!defined('URL')) {
             <div class="row">
                 <div class="col-md-8 blog-main">
                     <?php
+                    if (empty($this->Dados['artigos'])) {
+                        echo "<div class='alert alert-danger'>Erro: Nenhum artigo encontrado!</div>";
+                    }
                     foreach ($this->Dados['artigos'] as $artigo) {
                         extract($artigo);
                         ?>
@@ -34,8 +37,6 @@ if (!defined('URL')) {
 
                     echo $this->Dados['paginacao'];
                     ?>
-
-                   
                 </div>
                 <aside class="col-md-4 blog-sidebar">
                     <div class="p-3 mb-3 bg-light rounded">
