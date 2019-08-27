@@ -17,7 +17,9 @@ class StsBlog
         $this->PageId = (int) $PageId;
         $paginacao = new \Sts\Models\helper\StsPaginacao(URL . 'blog');
         //depois lembrar de troca 3 por 5
-        $paginacao->condicao($  $this->PageId, 3);
+        $paginacao->condicao($this->PageId, 3);
+        //listar a paginacao 
+        $paginacao->paginacao('SELECT COUNT (id) AS num_result FROM sts_artigos WHERE  adms_sit_id =:adms_sit_id' ,'adms_sit_id=1');
 
 
         $listar = new \Sts\Models\helper\StsRead();

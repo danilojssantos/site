@@ -13,6 +13,8 @@ class StsPaginacao
     private $Pagina;
     private $LimiteResultado;
     private $Offset;
+    private $Query;
+    private $ParseString;
 
     function __construct($Link)
     {
@@ -23,11 +25,20 @@ class StsPaginacao
         $this->MaxLink = 2;
     }    
 
-
+    //cria a regra da paginação 
     public function condicao($Pagina, $LimitResultado)
     {
         $this->Pagina = (int) $Pagina ? $Pagina :1;
         $this->LimiteResultado = (int) $LimitResultado;
         $this->Offset = ($this->Pagina * $this->LimiteResultado) - $this->LimiteResultado;
     }
+
+    public function paginacao($Query, $ParseString = null)
+    {
+        $this->Query = (string) $Query;
+        $this->ParseString = (string) $ParseString;
+    }
+
+
+
 }
