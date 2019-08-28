@@ -30,9 +30,15 @@ class Blog
 
         //listar os artigos em destaque 
          
-        
         $listarArtDestaque = new \Sts\Models\StsArtDestaque();
         $this->Dados['artDestaque'] = $listarArtDestaque->listarArtDestaque();
+
+        //visualizar sobre o autor
+        
+        $visSobreAutor = new \Sts\Models\StsSobreAutor();
+        $this->Dados['sobreAutor'] = $visSobreAutor->SobreAutor();
+
+        
 
         //var_dump( $this->Dados['artigos']);
         $carregarView = new \Core\ConfigView("sts/Views/blog/blog", $this->Dados);
