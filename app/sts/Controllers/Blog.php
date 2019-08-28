@@ -28,6 +28,12 @@ class Blog
         $listarArtRecente = new \Sts\Models\StsArtRecente();
         $this->Dados['artRecente'] = $listarArtRecente->listarArtRecente();
 
+        //listar os artigos em destaque 
+         
+        
+        $listarArtDestaque = new \Sts\Models\StsArtDestaque();
+        $this->Dados['artDestaque'] = $listarArtDestaque->listarArtDestaque();
+
         //var_dump( $this->Dados['artigos']);
         $carregarView = new \Core\ConfigView("sts/Views/blog/blog", $this->Dados);
         $carregarView->renderizar();
