@@ -34,6 +34,7 @@ class Artigo
         $listarArtDestaque = new \Sts\Models\StsArtDestaque();
         $this->Dados['artDestaque'] = $listarArtDestaque->listarArtDestaque();
 
+        
         //visualizar sobre o autor
         
         $visSobreAutor = new \Sts\Models\StsSobreAutor();

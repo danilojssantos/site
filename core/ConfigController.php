@@ -2,6 +2,11 @@
 
 namespace Core;
 
+/**
+ * Description of ConfigController
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class ConfigController
 {
 
@@ -9,6 +14,7 @@ class ConfigController
     private $UrlConjunto;
     private $UrlController;
     private $UrlParametro;
+    private $Classe;
     private static $Format;
 
     public function __construct()
@@ -21,9 +27,9 @@ class ConfigController
             if (isset($this->UrlConjunto[0])) {
                 $this->UrlController = $this->slugController($this->UrlConjunto[0]);
             } else {
-                $this->UrlController = CONTROLER;
+                $this->UrlController = $this->slugController(CONTROLER);
             }
-            //condição dos segundo paramentro 
+
             if (isset($this->UrlConjunto[1])) {
                 $this->UrlParametro = $this->UrlConjunto[1];
             } else {
@@ -32,13 +38,10 @@ class ConfigController
             //echo "URL: {$this->Url} <br>";
             //echo "Controlle: {$this->UrlController} <br>";
         } else {
-            $this->UrlController = CONTROLER;
+            $this->UrlController = $this->slugController(CONTROLER);
             $this->UrlParametro = null;
         }
     }
-
-    
-        // função responsavel por retirar os caracteres especial na URL 
 
     private function limparUrl()
     {
@@ -65,22 +68,31 @@ class ConfigController
         $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugController)))));
         return $UrlController;
     }
-    
+
     public function carregar()
     {
-        if (file_exists('app/sts/Controllers/' . $this->UrlController . '.php')) {
-            $classe = "\\Sts\\Controllers\\" . $this->UrlController;
+        $this->Classe = "\\Sts\\Controllers\\" . $this->UrlController;
+        if (class_exists($this->Classe)) {
+            $this->carregarMetodo();
         } else {
-            $classe = "\\Sts\\Controllers\\Erro404";
+            $this->UrlController = $this->slugController(CONTROLER);
+            $this->carregar();
         }
+    }
 
-        $classeCarregar = new $classe; 
-
-        if($this->UrlParametro !== null){
-            $classeCarregar->index($this->UrlParametro);
+    private function carregarMetodo()
+    {
+        $classeCarregar = new $this->Classe;
+        if (method_exists($classeCarregar, "index")) {
+            if ($this->UrlParametro !== null) {
+                $classeCarregar->index($this->UrlParametro);
+            } else {
+                $classeCarregar->index();
+            }
         }else{
-            $classeCarregar->index();
-        }        
+            $this->UrlController = $this->slugController(CONTROLER);
+            $this->carregar();
+        }
     }
 
 }

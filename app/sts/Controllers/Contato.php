@@ -16,8 +16,7 @@ class Contato
     public function index()
     {
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-       echo "<br><br><br>";
-      //  var_dump($this->Dados);
+
         if(!empty($this->Dados['CadMsgCont'])){
             unset($this->Dados['CadMsgCont']);
             $cadContato = new \Sts\Models\StsContato();
