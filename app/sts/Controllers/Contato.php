@@ -1,6 +1,6 @@
 <?php
 
-namespace Sts\Controllers;
+namespace App\sts\Controllers;
 
 if (!defined('URL')) {
     header("Location: /");
@@ -15,6 +15,8 @@ class Contato
 
     public function index()
     {
+        
+        
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if(!empty($this->Dados['CadMsgCont'])){
@@ -31,7 +33,8 @@ class Contato
             
         }
         
-        
+        $listarMenu = new \Sts\Models\StsMenu();
+        $this->Dados['menu'] = $listarMenu->listarMenu();
         
         $carregarView = new \Core\ConfigView('sts/Views/contato/contato', $this->Dados);
         $carregarView->renderizar();

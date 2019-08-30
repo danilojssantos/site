@@ -1,6 +1,6 @@
 <?php
 
-namespace Sts\Controllers;
+namespace App\sts\Controllers;
 
 if (!defined('URL')) {
     header("Location: /");
@@ -16,10 +16,13 @@ class Artigo
     //public function index($Artigo = null)
     public function index($Artigo = null)
     {
+        $listarMenu = new \Sts\Models\StsMenu();
+        $this->Dados['menu'] = $listarMenu->listarMenu();
        
         $this->Artigo = (string) $Artigo;
        
       //  echo "<br><br><br>";
+   
        
        $visualizarArt = new \Sts\Models\StsArtigo();
        $this->Dados['sts_artigos'] = $visualizarArt->visualizarArtigo($this->Artigo);

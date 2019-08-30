@@ -26,8 +26,8 @@ class StsPaginas
         LIMIT :limit', "sts_situacaos_pg_id=1&controller={$this->UrlController}&limit=1");
         
         $this->Resultado = $listar->getResultado();
-        echo "<br><br><br>";
-       var_dump($this->Resultado); 
+        //echo "<br><br><br>";
+      // var_dump($this->Resultado); 
         return $this->Resultado;       
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace Sts\Controllers;
+namespace App\sts\Controllers;
 if(!defined('URL')){
     header("Location: /");
     exit();
@@ -11,8 +11,10 @@ class Home
     private $Dados;
     public function index()
     {
-
-       //carrega carousel  
+        //listar menu 
+        $listarMenu = new \Sts\Models\StsMenu();
+        $this->Dados['menu'] = $listarMenu->listarMenu();
+        
         $home = new \Sts\Models\StsCarousel(); 
         $this->Dados['sts_carousels'] = $home->listar();
        

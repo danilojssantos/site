@@ -80,7 +80,9 @@ class ConfigController
 
         if ($this->Paginas)
         {
-            $this->Classe = "\\Sts\\Controllers\\" . $this->UrlController;
+            extract($this->Paginas[0]);
+            
+            $this->Classe = "\\App\\{$tipo_tpg}\\Controllers\\" . $this->UrlController;
             if (class_exists($this->Classe)) {
                 $this->carregarMetodo();
 
