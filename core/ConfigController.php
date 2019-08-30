@@ -15,6 +15,7 @@ class ConfigController
     private $UrlController;
     private $UrlParametro;
     private $Classe;
+    private $Paginas;
     private static $Format;
 
     public function __construct()
@@ -71,15 +72,30 @@ class ConfigController
 
     public function carregar()
     {
-        $this->Classe = "\\Sts\\Controllers\\" . $this->UrlController;
-        if (class_exists($this->Classe)) {
-            $this->carregarMetodo();
-        } else {
+
+        $listarPg = new \Sts\Models\StsPaginas();
+      //  $listarPg = new \Sts\Models\StsPaginas();
+        $this->Paginas = $listarPg->listarPagina($this->UrlController);
+
+
+        if ($this->Paginas)
+        {
+            $this->Classe = "\\Sts\\Controllers\\" . $this->UrlController;
+            if (class_exists($this->Classe)) {
+                $this->carregarMetodo();
+
+            } else {
+                $this->UrlController = $this->slugController(CONTROLER);
+                $this->carregar();
+            }
+        }else{
             $this->UrlController = $this->slugController(CONTROLER);
             $this->carregar();
         }
-    }
+     }        
+       
 
+    
     private function carregarMetodo()
     {
         $classeCarregar = new $this->Classe;
