@@ -52,13 +52,13 @@ if (!defined('URL')) {
             <span class="sr-only">Next</span>
         </a>
     </div>
-    
+
     <?php extract($this->Dados['sts_servicos'][0]); ?>
     <div class="jumbotron servicos">
         <div class="container">
             <h2 class="display-4 text-center" style="margin-bottom: 40px;"><?php echo $titulo; ?></h2>
             <div class="card-deck">
-                <div class="card text-center anim__left">
+                <div class="card text-center anim_left">
                     <div class="icon-row tamanh-icone">
                         <span class="step size-96 text-danger">
                             <i class="icon <?php echo $icone_um; ?>"></i>
@@ -69,7 +69,7 @@ if (!defined('URL')) {
                         <p class="card-text lead"><?php echo $descricao_um; ?></p>      
                     </div>
                 </div>
-                <div class="card text-center anim__bottom">
+                <div class="card text-center anim_bottom">
                     <div class="icon-row tamanh-icone">
                         <span class="step size-96 text-danger">
                             <i class="icon <?php echo $icone_dois; ?>"></i>
@@ -80,7 +80,7 @@ if (!defined('URL')) {
                         <p class="card-text lead"><?php echo $descricao_dois; ?></p>
                     </div>
                 </div>
-                <div class="card text-center anim__right">
+                <div class="card text-center anim_right">
                     <div class="icon-row tamanh-icone ">
                         <span class="step size-96 text-danger">
                             <i class="icon <?php echo $icone_tres; ?>"></i>
@@ -98,9 +98,9 @@ if (!defined('URL')) {
     <?php extract($this->Dados['sts_videos'][0]); ?>
     <div class="jumbotron video">
         <div class="container">
-            <h2 class="display-4 text-center anim__left" style="margin-bottom: 40px;"><?php echo $titulo; ?></h2>
-            <p class="lead text-center anim__right"><?php echo $descricao; ?></p>
-            <div class="row justify-content-md-center anim__bottom">
+            <h2 class="display-4 text-center anim_left" style="margin-bottom: 40px;"><?php echo $titulo; ?></h2>
+            <p class="lead text-center anim_right"><?php echo $descricao; ?></p>
+            <div class="row justify-content-md-center anim_bottom">
 
                 <div class="col-12 col-md-8">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -110,16 +110,17 @@ if (!defined('URL')) {
             </div>
         </div>
     </div>
+
     <div class="jumbotron blog-home">
         <div class="container">
-            <h2 class="display-4 text-center" style="margin-bottom: 40px;">Últimos Notícias</h2>
+            <h2 class="display-4 text-center" style="margin-bottom: 40px;">Últimos Artigos</h2>
             <div class="card-deck blog-text">
                 <?php
                 foreach ($this->Dados['sts_artigos'] as $artigo) {
                     extract($artigo);
                     ?>
 
-                    <div class="card anim__bottom">
+                    <div class="card anim_bottom">
                         <a href="<?php echo URL . 'artigo/' . $slug; ?>" alt="<?php echo $titulo; ?>">
                             <img class="card-img-top" src="<?php echo URL . 'assets/imagens/artigo/' . $id . '/' . $imagem; ?>" alt="<?php echo $titulo; ?>">
                         </a>
@@ -139,8 +140,5 @@ if (!defined('URL')) {
             </div>
         </div>
     </div>
-
-
-
 
 </main>

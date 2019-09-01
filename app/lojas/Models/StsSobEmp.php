@@ -8,18 +8,20 @@ if (!defined('URL')) {
 }
 
 /**
- * Description of StsVideo
+ * Description of StsSobEmp
  *
  * @copyright (c) year, Cesar Szpak - Celke
  */
-class StsVideo
+class StsSobEmp
 {
     private $Resultado;
     
-    public function listar()
+    public function listarSobEmp()
     {
         $listar = new \Sts\Models\helper\StsRead();
-        $listar->exeRead('sts_videos', 'LIMIT :limit', 'limit=1');
+        $listar->fullRead('SELECT id, titulo, descricao, imagem FROM sts_sobs_emps
+                WHERE adms_sit_id =:adms_sit_id
+                ORDER BY ordem ASC', 'adms_sit_id=1');
         $this->Resultado = $listar->getResultado();
         return $this->Resultado;
     }

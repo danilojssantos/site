@@ -1,18 +1,17 @@
 {
-    "name":"danilo",
-    "description":"site do Danilo",
+    "name": "Danilo",
+    "description": "Projeto PHP OO",
     "authors": [
         {
-            "name": "Danilo Joaquim",
-            "email": "danilojssantos1@gmail.com"
+            "name": "Danilo Joauim",
+            "email": "danilojssatos1@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Core\\":"core",
-            "Sts\\":"app/sts",
-            "App\\":"app"
-
+            "Core\\" : "core",
+            "Sts\\": "app/sts",
+            "App\\": "app"
         }
     },
     "require": {}

@@ -1,30 +1,34 @@
 <?php
+
 namespace Core;
 
-class ConfigView 
+/**
+ * Description of ConfigView
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
+class ConfigView
 {
 
-    private $Nome; //recebe o nome da pagina 
-    private $Dados;//recebe os dados do banco
+    private $Nome;
+    private $Dados;
+
     public function __construct($Nome, array $Dados = null)
     {
         $this->Nome = (string) $Nome;
         $this->Dados = $Dados;
     }
-    //metodo responsavel por buscar a pagina 
 
     public function renderizar()
     {
-        //verifica se arquivo existe
-        if (file_exists('app/'. $this->Nome . '.php')) 
-        {
+        if (file_exists('app/' . $this->Nome . '.php')) {
             include 'app/sts/Views/include/cabecalho.php';
-            include 'app//sts/Views/include/menu.php';
-            include 'app/'. $this->Nome . '.php';
+            include 'app/sts/Views/include/menu.php';
+            include 'app/' . $this->Nome . '.php';
             include 'app/sts/Views/include/rodape.php';
-        } else{
-            echo "erro carregar a Pagina {$this->Nome}";
+        }else{
+            echo "Erro ao carregar a Página: {$this->Nome}";
         }
-        
     }
+
 }

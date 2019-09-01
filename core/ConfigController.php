@@ -2,11 +2,7 @@
 
 namespace Core;
 
-/**
- * Description of ConfigController
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class ConfigController
 {
 
@@ -72,32 +68,23 @@ class ConfigController
 
     public function carregar()
     {
-
         $listarPg = new \Sts\Models\StsPaginas();
-      //  $listarPg = new \Sts\Models\StsPaginas();
-        $this->Paginas = $listarPg->listarPagina($this->UrlController);
-
-
-        if ($this->Paginas)
-        {
+        $this->Paginas = $listarPg->listarPaginas($this->UrlController);
+        if ($this->Paginas) {
             extract($this->Paginas[0]);
-            
             $this->Classe = "\\App\\{$tipo_tpg}\\Controllers\\" . $this->UrlController;
             if (class_exists($this->Classe)) {
                 $this->carregarMetodo();
-
             } else {
                 $this->UrlController = $this->slugController(CONTROLER);
                 $this->carregar();
             }
-        }else{
+        } else {
             $this->UrlController = $this->slugController(CONTROLER);
             $this->carregar();
         }
-     }        
-       
+    }
 
-    
     private function carregarMetodo()
     {
         $classeCarregar = new $this->Classe;
@@ -107,7 +94,7 @@ class ConfigController
             } else {
                 $classeCarregar->index();
             }
-        }else{
+        } else {
             $this->UrlController = $this->slugController(CONTROLER);
             $this->carregar();
         }

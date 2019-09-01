@@ -1,6 +1,6 @@
 <?php
 
-namespace App\sts\Controllers;
+namespace App\lojas\Controllers;
 
 if (!defined('URL')) {
     header("Location: /");
@@ -12,7 +12,7 @@ if (!defined('URL')) {
  *
  * @copyright (c) year, Cesar Szpak - Celke
  */
-class Blog
+class Loja
 {
 
     private $Dados;
@@ -20,9 +20,6 @@ class Blog
 
     public function index()
     {
-        $listarMenu = new \Sts\Models\StsMenu();
-        $this->Dados['menu'] = $listarMenu->listarMenu();
-        
         $this->PageId = filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);
         $this->PageId = $this->PageId ? $this->PageId : 1;
         //echo "<br><br><br> {$this->PageId}";
@@ -39,7 +36,7 @@ class Blog
         $visSobreAutor = new \Sts\Models\StsSobreAutor();
         $this->Dados['sobreAutor'] = $visSobreAutor->sobreAutor();
 
-        $carregarView = new \Core\ConfigView('sts/Views/blog/blog', $this->Dados);
+        $carregarView = new \Core\ConfigView('lojas/Views/loja/vitrine', $this->Dados);
         $carregarView->renderizar();
     }
 
