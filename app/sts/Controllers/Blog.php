@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of Blog
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class Blog
 {
 
@@ -22,6 +18,9 @@ class Blog
     {
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
+
+        $listarSeo = new \Sts\Models\StsSeo(); 
+        $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $this->PageId = filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);
         $this->PageId = $this->PageId ? $this->PageId : 1;

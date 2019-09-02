@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of SobreEmpresa
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class SobreEmpresa
 {
 
@@ -21,6 +17,9 @@ class SobreEmpresa
     {
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
+
+        $listarSeo = new \Sts\Models\StsSeo(); 
+        $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $listarSobEmp = new \Sts\Models\StsSobEmp();
         $this->Dados['sts_sobs_emps'] = $listarSobEmp->listarSobEmp();

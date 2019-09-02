@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of Artigo
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class Artigo
 {
 
@@ -22,6 +18,9 @@ class Artigo
     {
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
+
+        $listarSeo = new \Sts\Models\StsSeo(); 
+        $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $this->Artigo = (string) $Artigo;
         //echo "<br><br><br>{$this->Artigo}";

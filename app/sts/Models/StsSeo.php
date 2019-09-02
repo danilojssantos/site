@@ -1,20 +1,45 @@
 <?php
+namespace Sts\Models;
 
-namespace Core;
+if (!defined('URL')) {
+    header("Location: /");
+    exit();
+}
 
 
-class ConfigController
+
+class StsSeo
 {
-
+    private $Resultado;
+    private $UrlController;
     private $Url;
     private $UrlConjunto;
-    private $UrlController;
-    private $UrlParametro;
-    private $Classe;
-    private $Paginas;
+    private $UrlParamentro;
     private static $Format;
 
-    public function __construct()
+
+    public function listarSeo()
+    {
+        $this->montarUrl();
+        //echo $this->UrlController;
+
+        $listar = new \Sts\Models\helper\StsRead();
+        $listar->fullRead('SELECT pg.endereco, pg.titulo, pg.keywords, pg.description,pg.author, pg.imagem,
+                rob.tipo tipo_rob
+                FROM sts_paginas pg
+                INNER JOIN sts_robots rob ON rob.id=pg.sts_robot_id
+                WHERE pg.controller =:controller
+                ORDER BY pg.id ASC
+                LIMIT :limit', "controller={$this->UrlController}&limit=1");
+                
+        $this->Resultado = $listar->getResultado();
+        
+       // var_dump($this->Resultado);
+       return $this->Resultado;
+
+    }
+
+    private function montarUrl()
     {
         if (!empty(filter_input(INPUT_GET, 'url', FILTER_DEFAULT))) {
             $this->Url = filter_input(INPUT_GET, 'url', FILTER_DEFAULT);
@@ -55,50 +80,13 @@ class ConfigController
         $this->Url = strtr(utf8_decode($this->Url), utf8_decode(self::$Format['a']), self::$Format['b']);
     }
 
-    public function slugController($SlugController)
+    private function slugController($SlugController)
     {
-        //$UrlController = strtolower($SlugController);
-        //$UrlController = explode("-", $UrlController);
-        //$UrlController = implode(" ", $UrlController);
-        //$UrlController = ucwords($UrlController);
-        //$UrlController = str_replace(" ", "", $UrlController);
+        
         $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugController)))));
         return $UrlController;
     }
 
-    public function carregar()
-    {
-        $listarPg = new \Sts\Models\StsPaginas();
-        $this->Paginas = $listarPg->listarPaginas($this->UrlController);
-        if ($this->Paginas) {
-            extract($this->Paginas[0]);
-            $this->Classe = "\\App\\{$tipo_tpg}\\Controllers\\" . $this->UrlController;
-            if (class_exists($this->Classe)) {
-                $this->carregarMetodo();
-            } else {
-                $this->UrlController = $this->slugController(CONTROLER);
-                $this->carregar();
-            }
-        } else {
-            $this->UrlController = $this->slugController(CONTROLER);
-            $this->carregar();
-        }
-    }
 
-    private function carregarMetodo()
-    {
-      //  echo "<br><br><br>";
-        $classeCarregar = new $this->Classe;
-        if (method_exists($classeCarregar, "index")) {
-            if ($this->UrlParametro !== null) {
-                $classeCarregar->index($this->UrlParametro);
-            } else {
-                $classeCarregar->index();
-            }
-        } else {
-            $this->UrlController = $this->slugController(CONTROLER);
-            $this->carregar();
-        }
-    }
 
 }

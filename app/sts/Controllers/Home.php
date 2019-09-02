@@ -21,6 +21,9 @@ class Home
     {
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
+        
+        $listarSeo = new \Sts\Models\StsSeo(); 
+        $this->Dados['seo'] = $listarSeo->listarSeo();
 
         $listar_car = new \Sts\Models\StsCarousel();
         $this->Dados['sts_carousels'] = $listar_car->listar();
