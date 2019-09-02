@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of Home
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class Home
 {
 
@@ -21,8 +17,8 @@ class Home
     {
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
-        
-        $listarSeo = new \Sts\Models\StsSeo(); 
+
+        $listarSeo = new \Sts\Models\StsSeo();
         $this->Dados['seo'] = $listarSeo->listarSeo();
 
         $listar_car = new \Sts\Models\StsCarousel();

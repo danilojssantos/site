@@ -1,4 +1,5 @@
 <?php
+
 namespace Sts\Models;
 
 if (!defined('URL')) {
@@ -6,37 +7,40 @@ if (!defined('URL')) {
     exit();
 }
 
-
-
 class StsSeo
 {
+
     private $Resultado;
     private $UrlController;
     private $Url;
     private $UrlConjunto;
     private $UrlParamentro;
+    private $ResultadoFac;
     private static $Format;
-
 
     public function listarSeo()
     {
         $this->montarUrl();
         //echo $this->UrlController;
-
         $listar = new \Sts\Models\helper\StsRead();
-        $listar->fullRead('SELECT pg.endereco, pg.titulo, pg.keywords, pg.description,pg.author, pg.imagem,
+        $listar->fullRead('SELECT pg.id, pg.endereco, pg.titulo, pg.keywords, pg.description,pg.author, pg.imagem,
                 rob.tipo tipo_rob
                 FROM sts_paginas pg
                 INNER JOIN sts_robots rob ON rob.id=pg.sts_robot_id
                 WHERE pg.controller =:controller
                 ORDER BY pg.id ASC
-                LIMIT :limit', "controller={$this->UrlController}&limit=1");
-                
+                LIMIT :limit', "controller={$this->UrlController}&limit=1");                
         $this->Resultado = $listar->getResultado();
         
-       // var_dump($this->Resultado);
-       return $this->Resultado;
-
+        $listarFac = new \Sts\Models\helper\StsRead();
+        $listarFac->fullRead('SELECT og_site_name, og_locale, fb_admins FROM sts_seo WHERE id =:id LIMIT :limit', "id=1&limit=1");
+        $this->ResultadoFac = $listarFac->getResultado();
+        $this->Resultado[0]['og_site_name'] = $this->ResultadoFac[0]['og_site_name'];
+        $this->Resultado[0]['og_locale'] = $this->ResultadoFac[0]['og_locale'];
+        $this->Resultado[0]['fb_admins'] = $this->ResultadoFac[0]['fb_admins'];
+        //var_dump($this->ResultadoFac);
+        //var_dump($this->Resultado);
+        return $this->Resultado;
     }
 
     private function montarUrl()
@@ -79,14 +83,11 @@ class StsSeo
         self::$Format['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr--------------------------------';
         $this->Url = strtr(utf8_decode($this->Url), utf8_decode(self::$Format['a']), self::$Format['b']);
     }
-
+    
     private function slugController($SlugController)
     {
-        
         $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugController)))));
         return $UrlController;
     }
-
-
 
 }
