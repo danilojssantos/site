@@ -20,7 +20,7 @@
             echo "<meta property='og:url' content='" . URL . "$endereco'>";
             echo "<meta property='og:title' content='$titulo'>";
             echo "<meta property='og:description' content='$description'>";
-            echo "<meta property='og:image' content='" . URL . "assets/imagens/pagina/$id/$imagem'>";
+            echo "<meta property='og:image' content='" . URL . "assets/imagens/$dir_img/$id/$imagem'>";
             echo "<meta property='og:type' content='website'>";
             //https://developers.facebook.com/tools/debug/
 
@@ -28,14 +28,18 @@
             echo "<meta name='twitter:card' content='summary_large_image'>";
             echo "<meta name='twitter:title' content='$titulo'>";
             echo "<meta name='twitter:description' content='$description'>";
-            echo "<meta name='twitter:image:src' content='" . URL . "assets/imagens/pagina/$id/$imagem'>";
+            echo "<meta name='twitter:image:src' content='" . URL . "assets/imagens/$dir_img/$id/$imagem'>";
             //https://cards-dev.twitter.com/validator
+
+            echo "<meta itemprop='name' content='$titulo'>";
+            echo "<meta itemprop='description' content='$description'>";
+            echo "<meta itemprop='image' content='" . URL . "assets/imagens/$dir_img/$id/$imagem'>";
+            echo "<meta itemprop='url' content='" . URL . "$endereco'>";
         }
         ?>
-        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.png">
+        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.ico">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/ionicons.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/personalizado.css">
     </head>
     <body>
-
