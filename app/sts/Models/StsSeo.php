@@ -7,6 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
+
 class StsSeo
 {
 
@@ -33,11 +34,12 @@ class StsSeo
         $this->Resultado = $listar->getResultado();
         
         $listarFac = new \Sts\Models\helper\StsRead();
-        $listarFac->fullRead('SELECT og_site_name, og_locale, fb_admins FROM sts_seo WHERE id =:id LIMIT :limit', "id=1&limit=1");
+        $listarFac->fullRead('SELECT og_site_name, og_locale, fb_admins, twitter_site FROM sts_seo WHERE id =:id LIMIT :limit', "id=1&limit=1");
         $this->ResultadoFac = $listarFac->getResultado();
         $this->Resultado[0]['og_site_name'] = $this->ResultadoFac[0]['og_site_name'];
         $this->Resultado[0]['og_locale'] = $this->ResultadoFac[0]['og_locale'];
         $this->Resultado[0]['fb_admins'] = $this->ResultadoFac[0]['fb_admins'];
+        $this->Resultado[0]['twitter_site'] = $this->ResultadoFac[0]['twitter_site'];
         //var_dump($this->ResultadoFac);
         //var_dump($this->Resultado);
         return $this->Resultado;

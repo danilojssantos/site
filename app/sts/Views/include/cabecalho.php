@@ -6,7 +6,6 @@
         <?php
         if (!empty($this->Dados['seo'][0])) {
             extract($this->Dados['seo'][0]);
-            
             echo "<title>$titulo</title>";
             echo "<meta name='robots' content='$tipo_rob'>";
             echo "<meta name='description' content='$description'>";
@@ -19,12 +18,21 @@
             //https://pt.piliapp.com/facebook/id/
             echo "<meta property='fb:admins' content='$fb_admins'>";
             echo "<meta property='og:url' content='" . URL . "$endereco'>";
-            echo "<meta property='og:title' content='$titulo>";
+            echo "<meta property='og:title' content='$titulo'>";
             echo "<meta property='og:description' content='$description'>";
-            echo "<meta property='og:image' content='".URL."assets/imagens/pagina/$id/$imagem'>";
+            echo "<meta property='og:image' content='" . URL . "assets/imagens/pagina/$id/$imagem'>";
+            echo "<meta property='og:type' content='website'>";
+            //https://developers.facebook.com/tools/debug/
+
+            echo "<meta name='twitter:site' content='$twitter_site'>";
+            echo "<meta name='twitter:card' content='summary_large_image'>";
+            echo "<meta name='twitter:title' content='$titulo'>";
+            echo "<meta name='twitter:description' content='$description'>";
+            echo "<meta name='twitter:image:src' content='" . URL . "assets/imagens/pagina/$id/$imagem'>";
+            //https://cards-dev.twitter.com/validator
         }
         ?>
-        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.ico">
+        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/ionicons.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/personalizado.css">

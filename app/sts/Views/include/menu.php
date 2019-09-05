@@ -17,18 +17,7 @@
                         <?php
                     }
                     ?>
-                    <!--<li class="nav-item menu">
-                        <a class="nav-link" href="<?php echo URL; ?>">Home </a>
-                    </li>
-                    <li class="nav-item menu">
-                        <a class="nav-link" href="<?php echo URL . 'sobre-empresa'; ?>">Sobre a Empresa</a>
-                    </li>
-                    <li class="nav-item menu">
-                        <a class="nav-link" href="<?php echo URL . 'blog'; ?>">Blog </a>
-                    </li>
-                    <li class="nav-item menu">
-                        <a class="nav-link" href="<?php echo URL . 'contato'; ?>">Contato</a>
-                    </li>-->
+                  
                 </ul>
             </div>
         </div>
