@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class StsMenu
 {
     private $Resultado;

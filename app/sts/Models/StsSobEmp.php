@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsSobEmp
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class StsSobEmp
 {
     private $Resultado;
