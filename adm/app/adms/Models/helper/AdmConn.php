@@ -1,6 +1,6 @@
 <?php
 
-namespace Sts\Models\helper;
+namespace App\adms\Models\helper;
 
 use PDO;
 
@@ -10,7 +10,7 @@ if (!defined('URL')) {
 }
 
 
-class StsConn
+class AdmConn
 {
 
     public static $Host = HOST;

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\adm\Controllers;
+namespace App\adms\Controllers;
 
 if (!defined('URL')) {
     header("Location: /");
     exit();
 }
-
 
 class Home
 {
@@ -17,7 +16,7 @@ class Home
     {
        
 
-        $carregarView = new \Core\ConfigView("adm/Views/home/home", $this->Dados);
+        $carregarView = new \Core\ConfigView("adms/Views/home/home", $this->Dados);
         $carregarView->renderizar();
     }
 

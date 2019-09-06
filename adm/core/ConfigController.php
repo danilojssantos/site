@@ -45,10 +45,10 @@ class ConfigController
             $this->UrlParametro = null;
         }
 
-         echo "URL: {$this->Url} <br>";
-         echo "Controlle: {$this->UrlController} <br>";
-         echo "Metodo: {$this->UrlMetodo} <br>";
-         echo "Paramento: {$this->UrlParametro} <br>";
+         //echo "URL: {$this->Url} <br>";
+         //echo "Controlle: {$this->UrlController} <br>";
+         //echo "Metodo: {$this->UrlMetodo} <br>";
+         //echo "Paramento: {$this->UrlParametro} <br>";
 
 
     }
@@ -81,9 +81,9 @@ class ConfigController
 
     public function carregar()
     {
-        $listarPg = new \Sts\Models\StsPaginas();
+        $listarPg = new \App\adms\Models\admsPaginas();
         $this->Paginas = $listarPg->listarPaginas($this->UrlController);
-        if ($this->Paginas) {
+       /* if ($this->Paginas) {
             extract($this->Paginas[0]);
             $this->Classe = "\\App\\{$tipo_tpg}\\Controllers\\" . $this->UrlController;
             if (class_exists($this->Classe)) {
@@ -96,6 +96,7 @@ class ConfigController
             $this->UrlController = $this->slugController(CONTROLER);
             $this->carregar();
         }
+        */
     }
 
     private function carregarMetodo()
