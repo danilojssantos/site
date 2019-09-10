@@ -2,7 +2,11 @@
 
 namespace Core;
 
-
+/**
+ * Description of ConfigController
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class ConfigController
 {
 
@@ -27,6 +31,7 @@ class ConfigController
             } else {
                 $this->UrlController = $this->slugController(CONTROLER);
             }
+
             if (isset($this->UrlConjunto[1])) {
                 $this->UrlMetodo = $this->UrlConjunto[1];
             } else {
@@ -38,20 +43,15 @@ class ConfigController
             } else {
                 $this->UrlParametro = null;
             }
-           // echo "URL: {$this->Url} <br>";
-            //echo "Controlle: {$this->UrlController} <br>";
         } else {
             $this->UrlController = $this->slugController(CONTROLER);
             $this->UrlController = $this->slugController(METODO);
             $this->UrlParametro = null;
         }
-
-         //echo "URL: {$this->Url} <br>";
-         //echo "Controlle: {$this->UrlController} <br>";
-         //echo "Metodo: {$this->UrlMetodo} <br>";
-         //echo "Paramento: {$this->UrlParametro} <br>";
-
-
+        //echo "URL: {$this->Url} <br>";
+        //echo "Controlle: {$this->UrlController} <br>";
+        //echo "Metodo: {$this->UrlMetodo} <br>";
+        //echo "Paramento: {$this->UrlParametro} <br>";
     }
 
     private function limparUrl()
@@ -71,48 +71,36 @@ class ConfigController
 
     public function slugController($SlugController)
     {
-        
         $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugController)))));
         return $UrlController;
     }
 
     public function carregar()
     {
-        $listarPg = new \App\adms\Models\admsPaginas();
+        $listarPg = new \App\adms\Models\AdmsPaginas();
         $this->Paginas = $listarPg->listarPaginas($this->UrlController, $this->UrlMetodo);
-        
-
         if ($this->Paginas) {
             extract($this->Paginas[0]);
-
-    
             $this->Classe = "\\App\\{$tipo_tpg}\\Controllers\\" . $this->UrlController;
-
-            if (class_exists($this->Classe)) {    
-
+            if (class_exists($this->Classe)) {
                 $this->carregarMetodo();
-              
-            }else{
+            } else {
                 $this->UrlController = $this->slugController(CONTROLER);
-                $this->UrlController = $this->slugController(METODO);
-                $this->carregar(); 
+                $this->UrlMetodo = $this->slugController(METODO);
+                $this->carregar();
             }
-        }else{
+        } else {
             $this->UrlController = $this->slugController(CONTROLER);
-            $this->UrlController = $this->slugController(METODO);
-            $this->carregar(); 
-
+            $this->UrlMetodo = $this->slugController(METODO);
+            $this->carregar();
         }
-      
     }
 
-
-    public function carregarMetodo()
+    private function carregarMetodo()
     {
         $classeCarregar = new $this->Classe;
-
-        if (method_exists($classeCarregar, $this->UrlMetodo)) {
-            if ($this->UrlParametro !== null) {
+        if(method_exists($classeCarregar, $this->UrlMetodo)){
+            if($this->UrlParametro !== null){
                 $classeCarregar->{$this->UrlMetodo}($this->UrlParametro);
             }else{
                 $classeCarregar->{$this->UrlMetodo}();
@@ -123,7 +111,4 @@ class ConfigController
             $this->carregar();
         }
     }
-
-   
-
 }

@@ -2,7 +2,11 @@
 
 namespace Core;
 
-
+/**
+ * Description of ConfigView
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class ConfigView
 {
 
@@ -18,9 +22,7 @@ class ConfigView
     public function renderizar()
     {
         if (file_exists('app/' . $this->Nome . '.php')) {
-          
             include 'app/' . $this->Nome . '.php';
-            
         }else{
             echo "Erro ao carregar a Página: {$this->Nome}";
         }

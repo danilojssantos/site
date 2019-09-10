@@ -1,10 +1,10 @@
 {
-    "name": "Danilo",
+    "name": "Celke",
     "description": "Projeto PHP OO",
     "authors": [
         {
-            "name": "Danilo Joauim",
-            "email": "danilojssatos1@gmail.com"
+            "name": "Cesar Szpak",
+            "email": "cesar@celke.com.br"
         }
     ],
     "autoload": {

@@ -9,8 +9,12 @@ if (!defined('URL')) {
     exit();
 }
 
-
-class admRead extends AdmConn
+/**
+ * Description of StsRead
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
+class AdmRead extends AdmConn
 {
 
     private $Select;

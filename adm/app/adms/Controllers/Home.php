@@ -7,6 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
+/**
+ * Description of Home
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class Home
 {
 
@@ -14,8 +19,7 @@ class Home
 
     public function index()
     {
-       
-
+        
         $carregarView = new \Core\ConfigView("adms/Views/home/home", $this->Dados);
         $carregarView->renderizar();
     }

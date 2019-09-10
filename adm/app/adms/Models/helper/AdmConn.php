@@ -9,7 +9,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsConn
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmConn
 {
 
