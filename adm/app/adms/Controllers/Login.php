@@ -9,8 +9,11 @@ if (!defined ('URL')) {
 
 class Login 
 {
+    private $Dados;
     public function acesso()
     {
-        echo "Pg Login";
+        $carregarView = new \Core\ConfigView("adms/Views/login/acesso",$this->Dados);
+
+        $carregarView->renderizarLogin();
     }
 }

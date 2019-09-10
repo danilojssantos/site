@@ -28,4 +28,14 @@ class ConfigView
         }
     }
 
+
+    public function renderizarLogin()
+    {
+        if (file_exists('app/' . $this->Nome . '.php')) {
+            include 'app/' . $this->Nome . '.php';
+        }else{
+            echo "Erro ao carregar a Página: {$this->Nome}";
+        }
+    }
+
 }
