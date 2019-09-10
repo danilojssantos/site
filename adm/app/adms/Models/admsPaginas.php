@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsPaginas
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsPaginas
 {
     private $Resultado;
@@ -27,9 +23,11 @@ class AdmsPaginas
                 tpg.tipo tipo_tpg
                 FROM adms_paginas pg
                 INNER JOIN adms_tps_pgs tpg ON tpg.id=pg.adms_tps_pg_id
-                WHERE pg.controller =:controller
-                AND pg.metodo =:metodo
-                LIMIT :limit", "controller={$this->UrlController}&metodo={$this->UrlMetodo}&limit=1");
+                LEFT JOIN adms_nivacs_pgs nivpg ON nivpg.id=pg.id AND nivpg.adms_niveis_acesso_id =:adms_niveis_acesso_id
+                WHERE (pg.controller =:controller
+                AND pg.metodo =:metodo) AND ((pg.lib_pub =:lib_pub) OR (nivpg.permissao =:permissao))
+                LIMIT :limit", "adms_niveis_acesso_id=1&controller={$this->UrlController}&metodo={$this->UrlMetodo}&lib_pub=1&permissao=1&limit=1");
+               
         $this->Resultado = $listar->getResultado();
         return $this->Resultado;        
     }
