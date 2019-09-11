@@ -4,4 +4,4 @@ if (!defined('URL')) {
     exit();
 }
 echo "Home <br>";
-echo "<a href='". URLADM . "login/logout'>Sair</a><br>";
+echo "<a href='". URLADM . "login/logout'>Sair</a><br>";    

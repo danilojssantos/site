@@ -22,6 +22,9 @@ class AdmsLogin
     public function acesso(array $Dados)
     {
         $this->Dados = $Dados;
+
+        $create = new \App\adms\Models\helper\AdmsCreate();
+        $create->exeCreate("adms_usuarios",$Dados);
         //var_dump($this->Dados);
         $this->validarDados();
         if ($this->Resultado) {
