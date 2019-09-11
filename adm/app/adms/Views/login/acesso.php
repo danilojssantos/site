@@ -12,10 +12,22 @@
         <form class="form-signin" method="POST" action="">
             <img class="mb-4" src="<?php echo URLADM . 'assets/imagens/logo_login/logo.png'; ?>" alt="Login" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Área Restrita</h1>
+            <?php
+            
+            //var_dump($this->Dados['form']);
+            if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            if (isset($this->Dados['form'])) {
+                $valorForm = $this->Dados['form'];
+            }
+
+            ?>
 
             <div class="form-group">
                 <label>Usuário</label>
-                <input name="usuario" type="text" class="form-control" placeholder="Digite o usuário">               
+                <input name="usuario" type="text" class="form-control" placeholder="Digite o usuário" value="<?php if(isset($valorForm['usuario'])) {echo $valorForm['usuario']; } ?>">               
             </div>
             <div class="form-group">
                 <label>Senha</label>
