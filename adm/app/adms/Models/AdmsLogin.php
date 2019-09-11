@@ -26,8 +26,12 @@ class AdmsLogin
         $this->validarDados();
         if ($this->Resultado) {
             $validaLogin = new \App\adms\Models\helper\AdmRead();
-            $validaLogin->fullRead("SELECT id, nome, email, senha, imagem, adms_niveis_acesso_id FROM adms_usuarios
+            $validaLogin->fullRead("SELECT user.id, user.nome, user.email, user.senha, user.imagem, user.adms_niveis_acesso_id,
+                    nivac.ordem ordem_nivac 
+                    FROM adms_usuarios user
+                    INNER JOIN adms_niveis_acessos nivac ON nivac.id=user.adms_niveis_acesso_id
                     WHERE usuario =:usuario LIMIT :limit", "usuario={$this->Dados['usuario']}&limit=1");
+                    
             $this->Resultado = $validaLogin->getResultado();
             //var_dump($this->Resultado);
             if (!empty($this->Resultado)) {
@@ -59,6 +63,7 @@ class AdmsLogin
             $_SESSION['usuario_email'] = $this->Resultado[0]['email'];
             $_SESSION['usuario_imagem'] = $this->Resultado[0]['imagem'];
             $_SESSION['adms_niveis_acesso_id'] = $this->Resultado[0]['adms_niveis_acesso_id'];
+            $_SESSION['ordem_nivac'] = $this->Resultado[0]['ordem_nivac'];
             $this->Resultado = true;
         } else {
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário ou a senha incorreto!</div>";

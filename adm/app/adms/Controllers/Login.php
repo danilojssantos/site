@@ -30,9 +30,24 @@ class Login
             
         }
 
+       
 
         $carregarView = new \Core\ConfigView("adms/Views/login/acesso",$this->Dados);
 
         $carregarView->renderizarLogin();
     }
+
+        public function logout()
+        {
+            unset( $_SESSION['usuario_id'],
+            $_SESSION['usuario_nome'],
+            $_SESSION['usuario_email'],
+            $_SESSION['usuario_imagem'],
+            $_SESSION['adms_niveis_acesso_id'],
+            $_SESSION['ordem_nivac']);
+            $_SESSION['msg'] = "<div class='alert alert-success'>Deslogado com Sucesso</div>";
+            $UrlDestino = URLADM . 'login/acesso';
+            header("Location: $UrlDestino");
+            exit();
+        }
 }
