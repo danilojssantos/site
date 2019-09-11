@@ -27,7 +27,8 @@
 
             <div class="form-group">
                 <label>Usuário</label>
-                <input name="usuario" type="text" class="form-control" placeholder="Digite o usuário" value="<?php if(isset($valorForm['usuario'])) {echo $valorForm['usuario']; } ?>">               
+                <input name="usuario" type="text" class="form-control" placeholder="Digite o usuário" value="<?php if(isset($valorForm['usuario'])){echo $valorForm['usuario']; } ?>">   
+                                                                                                                       
             </div>
             <div class="form-group">
                 <label>Senha</label>

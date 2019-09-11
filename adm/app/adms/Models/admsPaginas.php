@@ -16,6 +16,9 @@ class AdmsPaginas
 
     public function listarPaginas($UrlController = null, $UrlMetodo = null)
     {
+        if (!isset( $_SESSION['adms_niveis_acesso_id'])) {
+            $_SESSION['adms_niveis_acesso_id'] = null;
+        }
         $this->UrlController = (string) $UrlController;
         $this->UrlMetodo = (string) $UrlMetodo;
         $listar = new \App\adms\Models\helper\AdmRead();
@@ -26,9 +29,11 @@ class AdmsPaginas
                 LEFT JOIN adms_nivacs_pgs nivpg ON nivpg.id=pg.id AND nivpg.adms_niveis_acesso_id =:adms_niveis_acesso_id
                 WHERE (pg.controller =:controller
                 AND pg.metodo =:metodo) AND ((pg.lib_pub =:lib_pub) OR (nivpg.permissao =:permissao))
-                LIMIT :limit", "adms_niveis_acesso_id=1&controller={$this->UrlController}&metodo={$this->UrlMetodo}&lib_pub=1&permissao=1&limit=1");
+                LIMIT :limit", "adms_niveis_acesso_id={$_SESSION['adms_niveis_acesso_id']}&controller={$this->UrlController}&metodo={$this->UrlMetodo}&lib_pub=1&permissao=1&limit=1");
+                
                
         $this->Resultado = $listar->getResultado();
+        
         return $this->Resultado;        
     }
 }
