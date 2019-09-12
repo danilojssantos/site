@@ -28,9 +28,7 @@ class Login
                 $this->Dados['form'] = $this->Dados;
              }
             
-        }
-
-       
+        }   
 
         $carregarView = new \Core\ConfigView("adms/Views/login/acesso",$this->Dados);
 
@@ -53,6 +51,23 @@ class Login
 
         public function novoUsuario()
         {
+            $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            if (!empty($this->Dados['CadUserLogin'])) {
+               unset($this->Dados['CadUserLogin']);
+                //var_dump($this->Dados);
+                
+                $cadUser = new \App\adms\Models\AdmsLogin();
+                $cadUser->cadUser($this->Dados);
+
+                if ($cadUser->getResultado()) {
+                    $UrlDestino = URLADM . 'login/acesso';
+                    header("loccation: $UrlDestino");
+                }else{
+                    $this->Dados['form'] = $this->Dados;
+                }
+                
+                
+            }
             $carregarView = new \Core\ConfigView("adms/Views/login/novoUsuario",$this->Dados);
 
             $carregarView->renderizarLogin();

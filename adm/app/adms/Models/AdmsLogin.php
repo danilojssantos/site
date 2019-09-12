@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsLogin
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsLogin
 {
 
@@ -27,7 +23,7 @@ class AdmsLogin
     {
         $this->Dados = $Dados;
         
-        $Dados = ['nome' => 'Danilo', 'email' => 'danilo@danilojoaquim.com.br', 'usuario' => 'danilo@danilojoaquim.com.br', 'senha' => '$2y$10$Ljg1MfuADekeSv94OtD0d.7jZmmxP2lUblhn.911lldfs04LJYWvS', 'conf_email' => '2', 'adms_niveis_acesso_id' => '1', 'adms_sits_usuario_id' => '1', 'created' => date('Y-m-d H:i:s')];
+       
         $create = new \App\adms\Models\helper\AdmsCreate();
         $create->exeCreate("adms_usuarios", $Dados);
         
@@ -76,5 +72,40 @@ class AdmsLogin
             $this->Resultado = false;
         }
     }
+
+
+    public function cadUser(array $Dados)
+    {
+        $this->Dados = $Dados;
+        //var_dump(   $this->Dados);
+        if($this->Resultado){
+            $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
+            $this->Dados['conf_email'] = 2;
+            $this->Dados['adms_niveis_acesso_id'] = 5;
+            $this->Dados['adms_sits_usuario_id'] = 2;
+            $this->Dados['created'] = date('Y-m-d H:i:s'); 
+            $this->inserir();
+        }
+        
+        
+    }
+
+    private function inserir()
+    {
+        $cadUser = new \App\adms\Models\helper\AdmsCreate();
+        $cadUser->exeCreate('adms_usuario',$this->Dados);
+
+        if ($cadUser->getResultado()) {
+            $_SESSION['msg'] = "<div class='alert alert-success'> Usuário Cadastrado com Sucesso!!</div>";
+            $this->Resultado = true;        
+        } else {
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não pode ser cadastrado!</div>";
+            $this->Resultado = false;
+        }
+        
+    }
+
+
+
 
 }
