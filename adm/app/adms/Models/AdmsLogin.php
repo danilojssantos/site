@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsLogin
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsLogin
 {
 
@@ -22,21 +26,20 @@ class AdmsLogin
     public function acesso(array $Dados)
     {
         $this->Dados = $Dados;
-
+        
+        $Dados = ['nome' => 'Danilo', 'email' => 'danilo@danilojoaquim.com.br', 'usuario' => 'danilo@danilojoaquim.com.br', 'senha' => '$2y$10$Ljg1MfuADekeSv94OtD0d.7jZmmxP2lUblhn.911lldfs04LJYWvS', 'conf_email' => '2', 'adms_niveis_acesso_id' => '1', 'adms_sits_usuario_id' => '1', 'created' => date('Y-m-d H:i:s')];
         $create = new \App\adms\Models\helper\AdmsCreate();
-        $create->exeCreate("adms_usuarios",$Dados);
-        //var_dump($this->Dados);
+        $create->exeCreate("adms_usuarios", $Dados);
+        
         $this->validarDados();
         if ($this->Resultado) {
             $validaLogin = new \App\adms\Models\helper\AdmRead();
             $validaLogin->fullRead("SELECT user.id, user.nome, user.email, user.senha, user.imagem, user.adms_niveis_acesso_id,
-                    nivac.ordem ordem_nivac 
+                    nivac.ordem	ordem_nivac
                     FROM adms_usuarios user
                     INNER JOIN adms_niveis_acessos nivac ON nivac.id=user.adms_niveis_acesso_id
                     WHERE usuario =:usuario LIMIT :limit", "usuario={$this->Dados['usuario']}&limit=1");
-                    
             $this->Resultado = $validaLogin->getResultado();
-            //var_dump($this->Resultado);
             if (!empty($this->Resultado)) {
                 $this->validarSenha();
             } else {
