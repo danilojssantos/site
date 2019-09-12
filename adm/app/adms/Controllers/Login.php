@@ -50,4 +50,11 @@ class Login
             header("Location: $UrlDestino");
             exit();
         }
+
+        public function novoUsuario()
+        {
+            $carregarView = new \Core\ConfigView("adms/Views/login/novoUsuario",$this->Dados);
+
+            $carregarView->renderizarLogin();
+        }
 }

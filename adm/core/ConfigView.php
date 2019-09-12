@@ -21,6 +21,7 @@ class ConfigView
 
     public function renderizar()
     {
+        include 'app/adms/Views/include/cabecalho.php';
         if (file_exists('app/' . $this->Nome . '.php')) {
             include 'app/' . $this->Nome . '.php';
         }else{
@@ -31,6 +32,7 @@ class ConfigView
 
     public function renderizarLogin()
     {
+        include 'app/adms/Views/include/cabecalho.php';
         if (file_exists('app/' . $this->Nome . '.php')) {
             include 'app/' . $this->Nome . '.php';
         }else{
