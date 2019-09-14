@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <input name="email" type="email" class="form-control" placeholder="Digite o seu melhor e-mail" value="<?php if (isset($valorForm['email'])) {
+            <input name="email" type="text" class="form-control" placeholder="Digite o seu melhor e-mail" value="<?php if (isset($valorForm['email'])) {
             echo $valorForm['email'];
         } ?>"> 
         </div>

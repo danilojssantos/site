@@ -10,7 +10,7 @@ if (!defined('URL')) {
 }
 
 
-class AdmRead extends AdmConn
+class AdmsRead extends AdmsConn
 {
 
     private $Select;

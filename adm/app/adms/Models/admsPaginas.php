@@ -21,7 +21,7 @@ class AdmsPaginas
         }
         $this->UrlController = (string) $UrlController;
         $this->UrlMetodo = (string) $UrlMetodo;
-        $listar = new \App\adms\Models\helper\AdmRead();
+        $listar = new \App\adms\Models\helper\AdmsRead();
         $listar->fullRead("SELECT pg.id,
                 tpg.tipo tipo_tpg
                 FROM adms_paginas pg

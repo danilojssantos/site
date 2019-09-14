@@ -21,15 +21,10 @@ class AdmsLogin
 
     public function acesso(array $Dados)
     {
-        $this->Dados = $Dados;
-        
-       
-        $create = new \App\adms\Models\helper\AdmsCreate();
-        $create->exeCreate("adms_usuarios", $Dados);
-        
+        $this->Dados = $Dados;        
         $this->validarDados();
         if ($this->Resultado) {
-            $validaLogin = new \App\adms\Models\helper\AdmRead();
+            $validaLogin = new \App\adms\Models\helper\AdmsRead();
             $validaLogin->fullRead("SELECT user.id, user.nome, user.email, user.senha, user.imagem, user.adms_niveis_acesso_id,
                     nivac.ordem	ordem_nivac
                     FROM adms_usuarios user
@@ -72,40 +67,41 @@ class AdmsLogin
             $this->Resultado = false;
         }
     }
-
-
+    
     public function cadUser(array $Dados)
     {
         $this->Dados = $Dados;
-        //var_dump(   $this->Dados);
+        $this->validarDados();
         if($this->Resultado){
-            $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
-            $this->Dados['conf_email'] = 2;
-            $this->Dados['adms_niveis_acesso_id'] = 5;
-            $this->Dados['adms_sits_usuario_id'] = 2;
-            $this->Dados['created'] = date('Y-m-d H:i:s'); 
-            $this->inserir();
-        }
-        
-        
-    }
+            
+            $valEmail = new \App\adms\Models\helper\AdmsEmail();
+            $valEmail->valEmail($this->Dados['email']);
 
+            if ($valEmail->getResultado()) {
+                $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
+                $this->Dados['conf_email'] = 2;
+                $this->Dados['adms_niveis_acesso_id'] = 5;
+                $this->Dados['adms_sits_usuario_id'] = 2;
+                $this->Dados['created'] = date('Y-m-d H:i:s'); 
+                $this->inserir();
+          }else{
+                $this->Resultado = false;
+            }
+
+        } 
+    }
+    
     private function inserir()
     {
         $cadUser = new \App\adms\Models\helper\AdmsCreate();
-        $cadUser->exeCreate('adms_usuario',$this->Dados);
-
-        if ($cadUser->getResultado()) {
-            $_SESSION['msg'] = "<div class='alert alert-success'> Usuário Cadastrado com Sucesso!!</div>";
-            $this->Resultado = true;        
-        } else {
-            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não pode ser cadastrado!</div>";
+        $cadUser->exeCreate('adms_usuarios', $this->Dados);
+        if($cadUser->getResultado()){
+            $_SESSION['msg'] = "<div class='alert alert-success'>Usuário cadastrado com sucesso!</div>";
+            $this->Resultado = true;
+        }else{
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não foi cadastrado com sucesso!</div>";
             $this->Resultado = false;
         }
-        
     }
-
-
-
 
 }

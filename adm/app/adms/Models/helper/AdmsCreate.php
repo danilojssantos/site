@@ -8,7 +8,7 @@ if (!defined('URL')) {
 }
 
 
-class AdmsCreate extends AdmConn
+class AdmsCreate extends AdmsConn
 {
     private $Tabela;
     private $Dados;

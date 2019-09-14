@@ -10,7 +10,7 @@ if (!defined('URL')) {
 }
 
 
-class AdmConn
+class AdmsConn
 {
 
     public static $Host = HOST;
