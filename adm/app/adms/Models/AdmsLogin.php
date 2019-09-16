@@ -74,14 +74,20 @@ class AdmsLogin
     {
         $this->Dados = $Dados;
         $this->validarDados();
-        
+
         if ($this->Resultado) {
+            
             $valEmail = new \App\adms\Models\helper\AdmsEmail();
             $valEmail->valEmail($this->Dados['email']);
 
             $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
             $valEmailUnico->valEmailUnico($this->Dados['email']);
-            if (($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
+
+            $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
+            $valUsuario->valUsuario($this->Dados['usuario']);
+
+           
+            if ( ($valUsuario->getResultado()) AND($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
                 $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
                 $this->Dados['conf_email'] = 2;
                 $this->Dados['adms_niveis_acesso_id'] = 5;
