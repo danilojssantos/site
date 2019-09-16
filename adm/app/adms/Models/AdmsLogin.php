@@ -67,28 +67,31 @@ class AdmsLogin
             $this->Resultado = false;
         }
     }
+
+    
     
     public function cadUser(array $Dados)
     {
         $this->Dados = $Dados;
         $this->validarDados();
-        if($this->Resultado){
-            
+        
+        if ($this->Resultado) {
             $valEmail = new \App\adms\Models\helper\AdmsEmail();
             $valEmail->valEmail($this->Dados['email']);
 
-            if ($valEmail->getResultado()) {
+            $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
+            $valEmailUnico->valEmailUnico($this->Dados['email']);
+            if (($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
                 $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
                 $this->Dados['conf_email'] = 2;
                 $this->Dados['adms_niveis_acesso_id'] = 5;
                 $this->Dados['adms_sits_usuario_id'] = 2;
-                $this->Dados['created'] = date('Y-m-d H:i:s'); 
+                $this->Dados['created'] = date('Y-m-d H:i:s');
                 $this->inserir();
-          }else{
+            } else {
                 $this->Resultado = false;
             }
-
-        } 
+        }
     }
     
     private function inserir()
