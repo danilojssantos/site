@@ -86,13 +86,13 @@ class AdmsLogin
             $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
             $valUsuario->valUsuario($this->Dados['usuario']);
 
+
+            $valSenha = new \App\adms\Models\helper\AdmsValSenha();
+            $valSenha->valSenha($this->Dados['senha']);
+
            
-            if ( ($valUsuario->getResultado()) AND($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
-                $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
-                $this->Dados['conf_email'] = 2;
-                $this->Dados['adms_niveis_acesso_id'] = 5;
-                $this->Dados['adms_sits_usuario_id'] = 2;
-                $this->Dados['created'] = date('Y-m-d H:i:s');
+            if (($valSenha->getResultado()) AND ($valUsuario->getResultado()) AND($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
+                
                 $this->inserir();
             } else {
                 $this->Resultado = false;
@@ -102,6 +102,11 @@ class AdmsLogin
     
     private function inserir()
     {
+        $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
+        $this->Dados['conf_email'] = 2;
+        $this->Dados['adms_niveis_acesso_id'] = 5;
+        $this->Dados['adms_sits_usuario_id'] = 2;
+        $this->Dados['created'] = date('Y-m-d H:i:s');
         $cadUser = new \App\adms\Models\helper\AdmsCreate();
         $cadUser->exeCreate('adms_usuarios', $this->Dados);
         if($cadUser->getResultado()){
