@@ -13,6 +13,7 @@ class AdmsLogin
 
     private $Dados;
     private $Resultado;
+    private $InfoCadUser;
 
     function getResultado()
     {
@@ -102,10 +103,11 @@ class AdmsLogin
     
     private function inserir()
     {
+        $this->infoCadUser();
         $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
-        $this->Dados['conf_email'] = 2;
-        $this->Dados['adms_niveis_acesso_id'] = 5;
-        $this->Dados['adms_sits_usuario_id'] = 2;
+        $this->Dados['conf_email'] = md5($this->Dados['senha'] . date('Y-m-d H:i'));
+        $this->Dados['adms_niveis_acesso_id'] = $this->InfoCadUser[0]['adms_niveis_acesso_id'];
+        $this->Dados['adms_sits_usuario_id'] = $this->InfoCadUser[0]['adms_sits_usuario_id'];
         $this->Dados['created'] = date('Y-m-d H:i:s');
         $cadUser = new \App\adms\Models\helper\AdmsCreate();
         $cadUser->exeCreate('adms_usuarios', $this->Dados);
@@ -116,6 +118,15 @@ class AdmsLogin
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não foi cadastrado com sucesso!</div>";
             $this->Resultado = false;
         }
+    }
+    
+
+    private function infoCadUser()
+    {
+        $infoCadUser = new \App\adms\Models\helper\AdmsRead();
+        $infoCadUser->fullRead("SELECT env_email_conf, adms_niveis_acesso_id, adms_sits_usuario_id FROM adms_cads_usuarios WHERE id =:id LIMIT :limit", "id=1&limit=1");
+        
+        $this->InfoCadUser = $infoCadUser->getResultado();
     }
 
 }
