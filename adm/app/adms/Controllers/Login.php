@@ -16,6 +16,11 @@ class Login
     public function acesso()
     {
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        $emailPHPMailer = new \App\adms\Models\helper\AdmsPhpMailer();
+      //  $emailPhpMailer = new \App\adms\Models\helper\AdmsPhpMailer();
+        $emailPHPMailer->emailPhpMailer($this->Dados);
+       // $emailPhpMailer->emailPhpMailer($this->Dados);
         if (!empty($this->Dados['SendLogin'])) {
             unset($this->Dados['SendLogin']);
             $visualLogin = new \App\adms\Models\AdmsLogin();

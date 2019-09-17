@@ -11,6 +11,10 @@ class ComposerStaticInit055fa03e19d2a8f9195757dce9892607
         array (
             'Sts\\' => 4,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -25,6 +29,10 @@ class ComposerStaticInit055fa03e19d2a8f9195757dce9892607
         'Sts\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/sts',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Core\\' => 
         array (
