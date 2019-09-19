@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of Login
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class Login
 {
 
@@ -15,12 +19,7 @@ class Login
 
     public function acesso()
     {
-        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        $emailPHPMailer = new \App\adms\Models\helper\AdmsPhpMailer();
-      //  $emailPhpMailer = new \App\adms\Models\helper\AdmsPhpMailer();
-        $emailPHPMailer->emailPhpMailer($this->Dados);
-       // $emailPhpMailer->emailPhpMailer($this->Dados);
+        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT); 
         if (!empty($this->Dados['SendLogin'])) {
             unset($this->Dados['SendLogin']);
             $visualLogin = new \App\adms\Models\AdmsLogin();
@@ -42,27 +41,6 @@ class Login
         $_SESSION['msg'] = "<div class='alert alert-success'>Deslogado com sucesso</div>";
         $UrlDestino = URLADM . 'login/acesso';
         header("Location: $UrlDestino");
-    }
-
-    public function novoUsuario()
-    {
-        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if (!empty($this->Dados['CadUserLogin'])) {
-            unset($this->Dados['CadUserLogin']);
-            $cadUser = new \App\adms\Models\AdmsLogin();
-            $cadUser->cadUser($this->Dados);
-            if ($cadUser->getResultado()) {
-                $UrlDestino = URLADM . 'login/acesso';
-                header("Location: $UrlDestino");
-            } else {
-                $this->Dados['form'] = $this->Dados;
-                $carregarView = new \Core\ConfigView("adms/Views/login/novoUsuario", $this->Dados);
-                $carregarView->renderizarLogin();
-            }
-        } else {
-            $carregarView = new \Core\ConfigView("adms/Views/login/novoUsuario", $this->Dados);
-            $carregarView->renderizarLogin();
-        }
     }
 
 }

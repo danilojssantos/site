@@ -10,44 +10,71 @@ if (!defined('URL')) {
     exit();
 }
 
-
-
+/**
+ * Description of AdmsPhpMailer
+ *
+ * @author Celke
+ */
 class AdmsPhpMailer
 {
 
     private $Resultado;
-
-    public function emailPhpMailer($Dados)
+    private $DadosCredEmail;
+    private $Dados;
+    
+    function getResultado()
     {
-        $mail = new PHPMailer(true);                              
+        return $this->Resultado;
+    }
+
+    
+    public function emailPhpMailer(array $Dados)
+    {
+        $this->Dados = $Dados;
+        $credEmail = new \App\adms\Models\helper\AdmsRead();
+        $credEmail->fullRead("SELECT * FROM adms_confs_emails WHERE id =:id LIMIT :limit", "id=1&limit=1");
+        $this->DadosCredEmail = $credEmail->getResultado();
+        //var_dump($this->DadosCredEmail);
+        if ((isset($this->DadosCredEmail[0]['host'])) AND ( !empty($this->DadosCredEmail[0]['host']))) {
+            $this->confEmail();
+        } else {
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Necessário inserir as credencias do e-mail no administrativo para enviar e-mail!</div>";
+            $this->Resultado = false;
+        }
+    }
+
+    private function confEmail()
+    {
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         try {
-                                           
+            //Server settings
+            //$mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+            $mail->Host = $this->DadosCredEmail[0]['host'];  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'email';                 // SMTP username
-            $mail->Password = '';                           // SMTP password
-            $mail->SMTPSecure = 'tsl';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
-            
+            $mail->Username = $this->DadosCredEmail[0]['usuario'];                 // SMTP username
+            $mail->Password = $this->DadosCredEmail[0]['senha'];                           // SMTP password
+            $mail->SMTPSecure = $this->DadosCredEmail[0]['smtpsecure'];                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = $this->DadosCredEmail[0]['porta'];                                    // TCP port to connect to
             //Recipients
-            $mail->setFrom('@gmail.com', 'danilo');
-            $mail->addAddress('@gmail.com', 'es');     // Add a recipient
+            $mail->setFrom($this->DadosCredEmail[0]['email'], $this->DadosCredEmail[0]['nome']);
+            $mail->addAddress($this->Dados['dest_email'], $this->Dados['dest_nome']);     // Add a recipient
             //
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Confirmar e-mail';
-            $mail->Body = 'Mensagem em html <b>negrito!</b>';
-            $mail->AltBody = 'Mensagem somente texto';
+            $mail->Subject = $this->Dados['titulo_email'];
+            $mail->Body = $this->Dados['cont_email'];
+            $mail->AltBody = $this->Dados['cont_text_email'];
 
-            if($mail->send()){
-                echo 'Messagem enviada com sucesso';
-            }else{
-                echo 'Erro a messagem não foi enviada com sucesso';
+            if ($mail->send()) {
+                //echo 'Messagem enviada com sucesso';
+                $this->Resultado = true;
+            } else {
+                $this->Resultado = false;
+                //echo 'Erro Messagem nao foi enviada com sucesso';
             }
-            
         } catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+            $this->Resultado = false;
         }
     }
 

@@ -7,13 +7,16 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsLogin
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsLogin
 {
 
     private $Dados;
     private $Resultado;
-    private $InfoCadUser;
 
     function getResultado()
     {
@@ -22,7 +25,7 @@ class AdmsLogin
 
     public function acesso(array $Dados)
     {
-        $this->Dados = $Dados;        
+        $this->Dados = $Dados;
         $this->validarDados();
         if ($this->Resultado) {
             $validaLogin = new \App\adms\Models\helper\AdmsRead();
@@ -67,66 +70,6 @@ class AdmsLogin
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário ou a senha incorreto!</div>";
             $this->Resultado = false;
         }
-    }
-
-    
-    
-    public function cadUser(array $Dados)
-    {
-        $this->Dados = $Dados;
-        $this->validarDados();
-
-        if ($this->Resultado) {
-            
-            $valEmail = new \App\adms\Models\helper\AdmsEmail();
-            $valEmail->valEmail($this->Dados['email']);
-
-            $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
-            $valEmailUnico->valEmailUnico($this->Dados['email']);
-
-            $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
-            $valUsuario->valUsuario($this->Dados['usuario']);
-
-
-            $valSenha = new \App\adms\Models\helper\AdmsValSenha();
-            $valSenha->valSenha($this->Dados['senha']);
-
-           
-            if (($valSenha->getResultado()) AND ($valUsuario->getResultado()) AND($valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
-                
-                $this->inserir();
-            } else {
-                $this->Resultado = false;
-            }
-        }
-    }
-    
-    private function inserir()
-    {
-        $this->infoCadUser();
-        $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
-        $this->Dados['conf_email'] = md5($this->Dados['senha'] . date('Y-m-d H:i'));
-        $this->Dados['adms_niveis_acesso_id'] = $this->InfoCadUser[0]['adms_niveis_acesso_id'];
-        $this->Dados['adms_sits_usuario_id'] = $this->InfoCadUser[0]['adms_sits_usuario_id'];
-        $this->Dados['created'] = date('Y-m-d H:i:s');
-        $cadUser = new \App\adms\Models\helper\AdmsCreate();
-        $cadUser->exeCreate('adms_usuarios', $this->Dados);
-        if($cadUser->getResultado()){
-            $_SESSION['msg'] = "<div class='alert alert-success'>Usuário cadastrado com sucesso!</div>";
-            $this->Resultado = true;
-        }else{
-            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não foi cadastrado com sucesso!</div>";
-            $this->Resultado = false;
-        }
-    }
-    
-
-    private function infoCadUser()
-    {
-        $infoCadUser = new \App\adms\Models\helper\AdmsRead();
-        $infoCadUser->fullRead("SELECT env_email_conf, adms_niveis_acesso_id, adms_sits_usuario_id FROM adms_cads_usuarios WHERE id =:id LIMIT :limit", "id=1&limit=1");
-        
-        $this->InfoCadUser = $infoCadUser->getResultado();
     }
 
 }

@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of Home
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class Home
 {
 

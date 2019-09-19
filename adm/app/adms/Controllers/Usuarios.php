@@ -7,6 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
+/**
+ * Description of Usuarios
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class Usuarios
 {
     public function listar()

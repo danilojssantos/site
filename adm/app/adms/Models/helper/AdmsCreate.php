@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsCreate
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsCreate extends AdmsConn
 {
     private $Tabela;
@@ -26,7 +30,7 @@ class AdmsCreate extends AdmsConn
     {
         $this->Tabela = (string) $Tabela;
         $this->Dados = $Dados;
-        var_dump($this->Dados);        
+        //var_dump($this->Dados);        
         $this->getIntrucao();
         $this->executarInstrucao();
     }
@@ -36,7 +40,6 @@ class AdmsCreate extends AdmsConn
         $colunas = implode(', ', array_keys($this->Dados));
         $valores= ':' . implode(', :', array_keys($this->Dados));
         $this->Query = "INSERT INTO {$this->Tabela} ({$colunas}) VALUES ({$valores})";
-        echo $this->Query;
     }
     
     private function executarInstrucao()

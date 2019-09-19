@@ -1,12 +1,17 @@
 <?php
 
-
 namespace App\adms\Models\helper;
+
 if (!defined('URL')) {
     header("Location: /");
     exit();
 }
 
+/**
+ * Description of AdmsEmailUnico
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsValSenha
 {
 
