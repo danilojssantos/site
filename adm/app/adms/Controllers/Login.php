@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of Login
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class Login
 {
 

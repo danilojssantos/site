@@ -34,6 +34,6 @@
             <input name="senha" type="password" class="form-control" placeholder="Digite a senha">
         </div>
         <input name="CadUserLogin" type="submit" class="btn btn-lg btn-success btn-block" value="Cadastrar">
-        <p class="text-center">Lembrou? <a href="<?php echo URLADM . 'login/acesso' ?>">Clique aqui</a> para logar</p>
+        <p class="text-center"><a href="<?php echo URLADM . 'login/acesso' ?>">Clique aqui</a> para acessar</p>
     </form>
 </body>

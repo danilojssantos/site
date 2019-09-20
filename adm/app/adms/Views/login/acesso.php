@@ -23,7 +23,7 @@
             <input name="senha" type="password" class="form-control" placeholder="Digite a senha">
         </div>
         <input name="SendLogin" type="submit" class="btn btn-lg btn-primary btn-block" value="Acessar">
-        <p class="text-center"><a href="<?php echo URLADM . 'novo-usuario/novo-usuario' ?>">Cadastrar</a> - Esqueceu a senha?</p>
+        <p class="text-center"><a href="<?php echo URLADM . 'novo-usuario/novo-usuario' ?>">Cadastrar</a> - <a href="<?php echo URLADM . 'esqueceu-senha/esqueceu-senha' ?>">Esqueceu a senha?</a></p>
     </form>
 </body>
 

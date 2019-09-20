@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsLogin
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsNovoUsuario
 {
 
@@ -74,7 +70,13 @@ class AdmsNovoUsuario
         $cadUser = new \App\adms\Models\helper\AdmsCreate();
         $cadUser->exeCreate('adms_usuarios', $this->Dados);
         if ($cadUser->getResultado()) {
-            $this->dadosEmail();
+            if($this->InfoCadUser[0]['env_email_conf'] == 1){
+                $this->dadosEmail();
+            }else{
+                $_SESSION['msg'] = "<div class='alert alert-success'>Usuário cadastrado com sucesso!</div>";
+                $this->Resultado = true;
+            }
+            
         } else {
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não foi cadastrado com sucesso!</div>";
             $this->Resultado = false;

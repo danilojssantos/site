@@ -10,11 +10,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsPhpMailer
- *
- * @author Celke
- */
+
 class AdmsPhpMailer
 {
 
@@ -34,7 +30,7 @@ class AdmsPhpMailer
         $credEmail = new \App\adms\Models\helper\AdmsRead();
         $credEmail->fullRead("SELECT * FROM adms_confs_emails WHERE id =:id LIMIT :limit", "id=1&limit=1");
         $this->DadosCredEmail = $credEmail->getResultado();
-        //var_dump($this->DadosCredEmail);
+
         if ((isset($this->DadosCredEmail[0]['host'])) AND ( !empty($this->DadosCredEmail[0]['host']))) {
             $this->confEmail();
         } else {

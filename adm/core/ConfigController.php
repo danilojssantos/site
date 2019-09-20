@@ -77,9 +77,10 @@ class ConfigController
 
     public function slugMetodo($SlugMetodo)
     {
-        $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugMetodo)))));
+        $UrlController = str_replace(" ", "", ucwords(implode(" ", explode("-", strtolower($SlugMetodo)))));        
         return lcfirst($UrlController);
     }
+
     public function carregar()
     {
         $listarPg = new \App\adms\Models\AdmsPaginas();
@@ -91,7 +92,7 @@ class ConfigController
                 $this->carregarMetodo();
             } else {
                 $this->UrlController = $this->slugController(CONTROLER);
-                $this->UrlMetodo = $this->sslugMetodo(METODO);
+                $this->UrlMetodo = $this->slugMetodo(METODO);
                 $this->carregar();
             }
         } else {

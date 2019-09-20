@@ -7,11 +7,6 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsEmailUnico
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
 class AdmsEmailUnico
 {
     private $Email;
