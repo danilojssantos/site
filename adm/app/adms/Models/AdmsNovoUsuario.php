@@ -58,6 +58,7 @@ class AdmsNovoUsuario
         }
     }
 
+
     private function inserir()
     {
         $this->infoCadUser();
