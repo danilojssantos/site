@@ -7,24 +7,37 @@ if (!defined('URL')) {
     exit();
 }
 
-class AtualSenha 
+
+class AtualSenha
 {
-  private $Chave ;
 
-  public function atualSenha()
-  {
-      $this->Chave = filter_input(INPUT_GET,"chave", FILTER_SANITIZE_STRING);
+    private $Chave;
+    private $Dados;
 
-      if (!empty($this->Chave)) {
-          
-
-      } else {
-        $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Link Ivalido!</div>";
+    public function atualSenha()
+    {
+        $this->Chave = filter_input(INPUT_GET, "chave", FILTER_SANITIZE_STRING);
+        if (!empty($this->Chave)) {
+            $validaChave = new \App\adms\Models\AdmsAtualSenha();
+            $validaChave->valChave($this->Chave);
+            if ($validaChave->getResultado()) {
+                $this->atualSenhaPriv();
+            } else {
                 $UrlDestino = URLADM . 'login/acesso';
                 header("Location: $UrlDestino");
-      }
-      
+            }
+        } else {
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Link inválido!</div>";
+            $UrlDestino = URLADM . 'login/acesso';
+            header("Location: $UrlDestino");
+        }
+    }
 
-  }
+    private function atualSenhaPriv()
+    {
+
+        $carregarView = new \Core\ConfigView("adms/Views/login/atualSenha", $this->Dados);
+        $carregarView->renderizarLogin();
+    }
 
 }
