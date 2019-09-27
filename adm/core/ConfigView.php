@@ -2,11 +2,7 @@
 
 namespace Core;
 
-/**
- * Description of ConfigView
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class ConfigView
 {
 
@@ -23,6 +19,7 @@ class ConfigView
     {
         include 'app/adms/Views/include/cabecalho_adm.php';
         include 'app/adms/Views/include/header.php';
+        include 'app/adms/Views/include/sidebar.php';
         if (file_exists('app/' . $this->Nome . '.php')) {
             include 'app/' . $this->Nome . '.php';
         }else{

@@ -37,7 +37,7 @@
             echo "<meta itemprop='url' content='" . URL . "$endereco'>";
         }
         ?>
-        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.ico">
+        <link rel="icon" href="<?php echo URL; ?>assets/imagens/icone/favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/ionicons.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/personalizado.css">

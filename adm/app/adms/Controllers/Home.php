@@ -15,6 +15,8 @@ class Home
 
     public function index()
     {
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $listarMenu->itemMenu();
         
         $carregarView = new \Core\ConfigView("adms/Views/home/home", $this->Dados);
         $carregarView->renderizar();

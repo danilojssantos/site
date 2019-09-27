@@ -1,3 +1,12 @@
+<?php
+
+if (!defined('URL')) {
+    header("Location: /");
+    exit();
+}
+
+?>
+
 <nav class="navbar navbar-expand navbar-dark bg-primary">
     <a class="sidebar-toggle text-light mr-3">
         <span class="navbar-toggler-icon"></span>
