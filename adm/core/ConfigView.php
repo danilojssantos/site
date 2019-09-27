@@ -21,11 +21,14 @@ class ConfigView
 
     public function renderizar()
     {
+        include 'app/adms/Views/include/cabecalho_adm.php';
+        include 'app/adms/Views/include/header.php';
         if (file_exists('app/' . $this->Nome . '.php')) {
             include 'app/' . $this->Nome . '.php';
         }else{
             echo "Erro ao carregar a Página: {$this->Nome}";
         }
+        include 'app/adms/Views/include/rodape_adm.php';
     }
 
     public function renderizarLogin()
