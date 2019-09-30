@@ -17,7 +17,19 @@ class AlterarSenha
     {
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->Dados['AltSenha'])) {
-            var_dump($this->Dados);
+            //var_dump($this->Dados);
+            $altSenhaBd = new \App\adms\Models\AdmsAlterarSenha();
+            $altSenhaBd->altSenha($this->Dados);
+            if ($altSenhaBd->getResultado()) {
+                $UrlDestino = URLADM . 'ver-perfil/perfil';
+                header("Location: $UrlDestino");     
+            } else {
+                $listarMenu = new \App\adms\Models\AdmsMenu();
+                $this->Dados['menu'] = $listarMenu->itemMenu();
+                $carregarView = new \Core\ConfigView("adms/Views/usuario/alterarSenha", $this->Dados);
+                $carregarView->renderizar();
+            }
+            
         } else {
             $listarMenu = new \App\adms\Models\AdmsMenu();
             $this->Dados['menu'] = $listarMenu->itemMenu();

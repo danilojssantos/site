@@ -8,6 +8,12 @@
                 <a href="<?php echo URLADM . 'ver-perfil/perfil'; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
             </div>
         </div><hr>
+        <?php
+        if(isset($_SESSION['msg'])){
+            echo $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        ?>
         <form method="POST" action="">            
             <div class="form-group">
                 <label>Senha</label>
