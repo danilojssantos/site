@@ -46,7 +46,7 @@ class AdmsPhpMailer
             //Server settings
             //$mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = $this->DadosCredEmail[0]['host'];  // Specify main and backup SMTP servers
+            $mail->Host =          $this->DadosCredEmail[0]['host'];  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = $this->DadosCredEmail[0]['usuario'];                 // SMTP username
             $mail->Password = $this->DadosCredEmail[0]['senha'];                           // SMTP password
