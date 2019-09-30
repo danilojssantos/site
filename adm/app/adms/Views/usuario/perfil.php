@@ -1,3 +1,9 @@
+<?php
+if (!defined('URL')) {
+    header("Location: /");
+    exit();
+}
+?>
 <div class="content p-1">
     <div class="list-group-item">
         <div class="d-flex">
@@ -6,18 +12,16 @@
             </div>
             <div class="p-2">
                 <span class="d-none d-md-block">
-                    <a href="listar.html" class="btn btn-outline-info btn-sm">Listar</a>
                     <a href="editar.html" class="btn btn-outline-warning btn-sm">Editar</a>
-                    <a href="apagar.html" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                    <a href="<?php echo URLADM.'alterar-senha/alt-senha'; ?>" class="btn btn-outline-danger btn-sm">Editar a Senha</a>
                 </span>
                 <div class="dropdown d-block d-md-none">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Ações
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">                                    
-                        <a class="dropdown-item" href="listar.html">Listar</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">    
                         <a class="dropdown-item" href="editar.html">Editar</a>
-                        <a class="dropdown-item" href="apagar.html" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                        <a class="dropdown-item" href="<?php echo URLADM.'alterar-senha/alt-senha'; ?>">Editar a Senha</a>
                     </div>
                 </div>
             </div>
