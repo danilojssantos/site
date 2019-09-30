@@ -29,7 +29,7 @@ if (!defined('URL')) {
                             ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Perfil</a>
+                <a class="dropdown-item" href="<?php echo URLADM . 'ver-perfil/perfil'; ?>"><i class="fas fa-user"></i> Perfil</a>
                     <a class="dropdown-item" href="<?php echo URLADM . 'login/logout'; ?>"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </li>
