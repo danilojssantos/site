@@ -7,7 +7,6 @@ if (!defined('URL')) {
     exit();
 }
 
-
 class AdmsEditarPerfil
 {
 
@@ -29,31 +28,37 @@ class AdmsEditarPerfil
         if ($valCampoVazio->getResultado()) {            
             $valEmail = new \App\adms\Models\helper\AdmsEmail();
             $valEmail->valEmail($this->Dados['email']);
-            if($valEmail->getResultado()){
-                
+
+            $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
+            $EditarUnico = true;
+            $valEmailUnico->valEmailUnico($this->Dados['email'], $EditarUnico, $_SESSION['usuario_id']);
+
+            $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
+            $valUsuario->valUsuario($this->Dados['usuario'], $EditarUnico, $_SESSION['usuario_id']);
+            
+            
+            if(( $valUsuario->getResultado()) AND ( $valEmailUnico->getResultado()) AND ( $valEmail->getResultado())){
+                $this->updateEditPerfil();
             }else{
                 $this->Resultado = false;
-            }
-            //$this->updateAltSenha();
+            }            
         } else {
             $this->Resultado = false;
         }
     }
 
-    private function updateAltSenha()
+    private function updateEditPerfil()
     {
-        $this->Dados['senha'] = password_hash($this->Dados['senha'], PASSWORD_DEFAULT);
         $this->Dados['modified'] = date("Y-m-d H:i:s");
         $upAltSenha = new \App\adms\Models\helper\AdmsUpdate();
         $upAltSenha->exeUpdate("adms_usuarios", $this->Dados, "WHERE id =:id", "id=" . $_SESSION['usuario_id']);
         if ($upAltSenha->getResultado()) {
-            $_SESSION['msg'] = "<div class='alert alert-success'>Senha atualizada com sucesso!</div>";
+            $_SESSION['msg'] = "<div class='alert alert-success'>Perfil atualizado com sucesso!</div>";
             $this->Resultado = true;
         } else {
-            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: A senha não foi atualizada!</div>";
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: O perfil não foi atualizado!</div>";
             $this->Resultado = false;
         }
     }
 
 }
-

@@ -16,6 +16,9 @@
         if (isset($this->Dados['form'])) {
             $valorForm = $this->Dados['form'];
         }
+        if (isset($this->Dados['form'][0])) {
+            $valorForm = $this->Dados['form'][0];
+        }
         ?>
         <form method="POST" action=""> 
             <div class="form-row">

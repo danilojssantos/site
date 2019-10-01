@@ -18,7 +18,7 @@ class EditarPerfil
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->Dados['EdiPerfil'])) {
             unset($this->Dados['EdiPerfil']);
-           var_dump($this->Dados);
+         //  var_dump($this->Dados);
             $altPerfilBd = new \App\adms\Models\AdmsEditarPerfil();
            
             $altPerfilBd->altPerfil($this->Dados);
@@ -33,7 +33,8 @@ class EditarPerfil
                 $carregarView->renderizar();
             }
         } else {
-            $this->Dados['form'] = $this->Dados;
+            $verPerfil = new \App\adms\Models\AdmsVerPerfil();
+            $this->Dados['form'] = $verPerfil->verPerfil();
             $listarMenu = new \App\adms\Models\AdmsMenu();
             $this->Dados['menu'] = $listarMenu->itemMenu();
             $carregarView = new \Core\ConfigView("adms/Views/usuario/editPerfil", $this->Dados);

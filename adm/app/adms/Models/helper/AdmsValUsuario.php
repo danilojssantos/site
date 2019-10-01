@@ -13,17 +13,25 @@ class AdmsValUsuario
 
     private $Usuario;
     private $Resultado;
+    private $EditarUnico;
+    private $DadoId;
 
     function getResultado()
     {
         return $this->Resultado;
     }
 
-    public function valUsuario($Usuario)
+    public function valUsuario($Usuario, $EditarUnico = null, $DadoId = null)
     {
         $this->Usuario = (string) $Usuario;
+        $this->EditarUnico = $EditarUnico;
+        $this->DadoId = $DadoId;
         $valUsuario = new \App\adms\Models\helper\AdmsRead();
-        $valUsuario->fullRead("SELECT id FROM adms_usuarios WHERE usuario =:usuario LIMIT :limit", "usuario={$this->Usuario}&limit=1");
+        if(!empty($this->EditarUnico) AND ($this->EditarUnico == true)){
+            $valUsuario->fullRead("SELECT id FROM adms_usuarios WHERE usuario =:usuario AND id <>:id LIMIT :limit", "usuario={$this->Usuario}&limit=1&id={$this->DadoId}");            
+        }else{
+            $valUsuario->fullRead("SELECT id FROM adms_usuarios WHERE usuario =:usuario LIMIT :limit", "usuario={$this->Usuario}&limit=1");
+        }        
         $this->Resultado = $valUsuario->getResultado();
         if (!empty($this->Resultado)) {
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Este usuário já está cadastrado!</div>";
