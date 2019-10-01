@@ -8,7 +8,7 @@ if (!defined('URL')) {
 }
 
 
-class AdmsAlterarSenha
+class AdmsEditarPerfil
 {
 
     private $Resultado;
@@ -19,15 +19,22 @@ class AdmsAlterarSenha
         return $this->Resultado;
     }
 
-    public function altSenha(array $Dados)
+    public function altPerfil(array $Dados)
     {
         $this->Dados = $Dados;
 
-        $valSenha = new \App\adms\Models\helper\AdmsValSenha();
-        $valSenha->valSenha($this->Dados['senha']);
+        $valCampoVazio = new \App\adms\Models\helper\AdmsCampoVazio;
+        $valCampoVazio->validarDados($this->Dados);
 
-        if ($valSenha->getResultado()) {
-            $this->updateAltSenha();
+        if ($valCampoVazio->getResultado()) {            
+            $valEmail = new \App\adms\Models\helper\AdmsEmail();
+            $valEmail->valEmail($this->Dados['email']);
+            if($valEmail->getResultado()){
+                
+            }else{
+                $this->Resultado = false;
+            }
+            //$this->updateAltSenha();
         } else {
             $this->Resultado = false;
         }

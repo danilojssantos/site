@@ -3,9 +3,7 @@ if (!defined('URL')) {
     header("Location: /");
     exit();
 }
-
 ?>
-
 <div class="d-flex">
     <nav class="sidebar">
         <ul class="list-unstyled">

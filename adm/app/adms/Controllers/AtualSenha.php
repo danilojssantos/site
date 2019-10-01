@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AtualSenha
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AtualSenha
 {
 
