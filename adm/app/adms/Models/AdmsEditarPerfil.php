@@ -7,13 +7,13 @@ if (!defined('URL')) {
     exit();
 }
 
-
 class AdmsEditarPerfil
 {
 
     private $Resultado;
     private $Dados;
     private $Foto;
+    private $ImgAntiga;
 
     function getResultado()
     {
@@ -23,29 +23,35 @@ class AdmsEditarPerfil
     public function altPerfil(array $Dados)
     {
         $this->Dados = $Dados;
-        var_dump($this->Dados);
+        //var_dump($this->Dados);
         $this->Foto = $this->Dados['imagem'];
-        unset($this->Dados['imagem']);
+        $this->ImgAntiga = $this->Dados['imagem_antiga'];
+        unset($this->Dados['imagem'], $this->Dados['imagem_antiga']);
 
         $valCampoVazio = new \App\adms\Models\helper\AdmsCampoVazio;
         $valCampoVazio->validarDados($this->Dados);
 
         if ($valCampoVazio->getResultado()) {
-            $valEmail = new \App\adms\Models\helper\AdmsEmail();
-            $valEmail->valEmail($this->Dados['email']);
+            $this->valCampos();
+        } else {
+            $this->Resultado = false;
+        }
+    }
 
-            $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
-            $EditarUnico = true;
-            $valEmailUnico->valEmailUnico($this->Dados['email'], $EditarUnico, $_SESSION['usuario_id']);
+    private function valCampos()
+    {
+        $valEmail = new \App\adms\Models\helper\AdmsEmail();
+        $valEmail->valEmail($this->Dados['email']);
 
-            $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
-            $valUsuario->valUsuario($this->Dados['usuario'], $EditarUnico, $_SESSION['usuario_id']);
+        $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
+        $EditarUnico = true;
+        $valEmailUnico->valEmailUnico($this->Dados['email'], $EditarUnico, $_SESSION['usuario_id']);
 
-            if (( $valUsuario->getResultado()) AND ( $valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
-                $this->valFoto();
-            } else {
-                $this->Resultado = false;
-            }
+        $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
+        $valUsuario->valUsuario($this->Dados['usuario'], $EditarUnico, $_SESSION['usuario_id']);
+
+        if (( $valUsuario->getResultado()) AND ( $valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
+            $this->valFoto();
         } else {
             $this->Resultado = false;
         }
@@ -55,19 +61,17 @@ class AdmsEditarPerfil
     {
         if (empty($this->Foto['name'])) {
             $this->updateEditPerfil();
-        }else{
-
+        } else {
             $slugImg = new \App\adms\Models\helper\AdmsSlug();
-           
             $this->Dados['imagem'] = $slugImg->nomeSlug($this->Foto['name']);
-        
+
             $uploadImg = new \App\adms\Models\helper\AdmsUploadImgRed();
-            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/'.$_SESSION['usuario_id'].'/', $this->Dados['imagem'], 150, 150);
-            if($uploadImg->getResultado()){
+            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/', $this->Dados['imagem'], 150, 150);
+            if ($uploadImg->getResultado()) {
                 $apagarImg = new \App\adms\Models\helper\AdmsApagarImg();
                 $apagarImg->apagarImg('assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/' . $this->ImgAntiga);
                 $this->updateEditPerfil();
-            }else{
+            } else {
                 $this->Resultado = false;
             }
         }

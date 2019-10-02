@@ -41,7 +41,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label><span class="text-danger">*</span> <strong>E-mail</label>
+                    <label><span class="text-danger">*</span> E-mail</label>
                     <input name="email" type="text" class="form-control" placeholder="Seu melhor e-mail" value="<?php
                     if (isset($valorForm['email'])) {
                         echo $valorForm['email'];
@@ -49,7 +49,7 @@
                     ?>">
                 </div>
                 <div class="form-group col-md-6">
-                    <label><span class="text-danger">*</span><strong> Usuário *</label>
+                    <label><span class="text-danger">*</span> Usuário</label>
                     <input name="usuario" type="text" class="form-control" id="nome" placeholder="Digite o usuário" value="<?php
                     if (isset($valorForm['usuario'])) {
                         echo $valorForm['usuario'];

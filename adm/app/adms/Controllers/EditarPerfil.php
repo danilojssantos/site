@@ -18,29 +18,29 @@ class EditarPerfil
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->Dados['EdiPerfil'])) {
             unset($this->Dados['EdiPerfil']);
-            $this->Dados['imagem'] = ($_FILES['imagem'] ? $_FILES['imagem']: null);
-         //  var_dump($this->Dados);
+            $this->Dados['imagem'] = ($_FILES['imagem'] ? $_FILES['imagem'] : null);
             $altPerfilBd = new \App\adms\Models\AdmsEditarPerfil();
-           
             $altPerfilBd->altPerfil($this->Dados);
             if ($altPerfilBd->getResultado()) {
                 $UrlDestino = URLADM . 'ver-perfil/perfil';
-                header("Location: $UrlDestino");                
+                header("Location: $UrlDestino");
             } else {
                 $this->Dados['form'] = $this->Dados;
-                $listarMenu = new \App\adms\Models\AdmsMenu();
-                $this->Dados['menu'] = $listarMenu->itemMenu();
-                $carregarView = new \Core\ConfigView("adms/Views/usuario/editPerfil", $this->Dados);
-                $carregarView->renderizar();
+                $this->altPerfilPriv();
             }
         } else {
             $verPerfil = new \App\adms\Models\AdmsVerPerfil();
             $this->Dados['form'] = $verPerfil->verPerfil();
-            $listarMenu = new \App\adms\Models\AdmsMenu();
-            $this->Dados['menu'] = $listarMenu->itemMenu();
-            $carregarView = new \Core\ConfigView("adms/Views/usuario/editPerfil", $this->Dados);
-            $carregarView->renderizar();
+            $this->altPerfilPriv();
         }
+    }
+
+    private function altPerfilPriv()
+    {
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $carregarView = new \Core\ConfigView("adms/Views/usuario/editPerfil", $this->Dados);
+        $carregarView->renderizar();
     }
 
 }
