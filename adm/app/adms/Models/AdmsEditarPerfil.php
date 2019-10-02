@@ -57,8 +57,8 @@ class AdmsEditarPerfil
             $this->updateEditPerfil();
         }else{
             $this->Dados['imagem'] = $this->Foto['name'];
-            $uploadImg = new \App\adms\Models\helper\AdmsUploadImg();
-            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/'.$_SESSION['usuario_id'].'/', $this->Dados['imagem']);
+            $uploadImg = new \App\adms\Models\helper\AdmsUploadImgRed();
+            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/'.$_SESSION['usuario_id'].'/', $this->Dados['imagem'], 150, 150);
             if($uploadImg->getResultado()){
                 $this->updateEditPerfil();
             }else{
