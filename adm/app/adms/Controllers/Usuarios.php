@@ -10,8 +10,16 @@ if (!defined('URL')) {
 
 class Usuarios
 {
+
+    private $Dados;
     public function listar()
     {
-        echo "listar usuários";
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+
+        $listarUsuario = new \App\adms\Models\AdmsListarUsuario();
+        $this->Dados['listUser'] = $listarUsuario->listarUsuario();
+        $carregarView = new \Core\ConfigView("adms/Views/usuario/listarUsuario", $this->Dados);
+        $carregarView->renderizar();
     }
 }
