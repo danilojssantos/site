@@ -20,7 +20,7 @@
             $valorForm = $this->Dados['form'][0];
         }
         ?>
-        <form method="POST" action=""> 
+        <form method="POST" action="" enctype="multipart/form-data"> 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label><span class="text-danger">*</span> Nome</label>

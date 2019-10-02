@@ -18,6 +18,7 @@ class EditarPerfil
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->Dados['EdiPerfil'])) {
             unset($this->Dados['EdiPerfil']);
+            $this->Dados['imagem'] = ($_FILES['imagem'] ? $_FILES['imagem']: null);
          //  var_dump($this->Dados);
             $altPerfilBd = new \App\adms\Models\AdmsEditarPerfil();
            
