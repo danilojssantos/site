@@ -64,6 +64,8 @@ class AdmsEditarPerfil
             $uploadImg = new \App\adms\Models\helper\AdmsUploadImgRed();
             $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/'.$_SESSION['usuario_id'].'/', $this->Dados['imagem'], 150, 150);
             if($uploadImg->getResultado()){
+                $apagarImg = new \App\adms\Models\helper\AdmsApagarImg();
+                $apagarImg->apagarImg('assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/' . $this->ImgAntiga);
                 $this->updateEditPerfil();
             }else{
                 $this->Resultado = false;
