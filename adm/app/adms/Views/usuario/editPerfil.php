@@ -49,6 +49,24 @@
         } ?>">
                 </div>
             </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label><span class="text-danger">*</span> Foto (150x150)</label>
+                    <input name="imagem" type="file" onchange="previewImagem();">
+                </div>
+                <div class="form-group col-md-6">
+                    <?php
+                    if(isset($valorForm['imagem']) AND !empty($valorForm['imagem'])){
+                        $imagem_antiga = URLADM . 'assets/imagens/usuario/'.$_SESSION['usuario_id'].'/'.$_SESSION['usuario_imagem'];
+                    }else{
+                        $imagem_antiga = URLADM . 'assets/imagens/usuario/preview_img.png';
+                    }
+                    ?>
+                    <img src="<?php echo $imagem_antiga; ?>" alt="Imagem do Usuário" id="preview-user" class="img-thumbnail" style="width: 150px; height: 150px;">
+                </div>
+            </div>
+            
             <p>
                 <span class="text-danger">* </span>Campo obrigatório
             </p>
