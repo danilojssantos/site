@@ -29,6 +29,10 @@ if (!defined('URL')) {
             </div>
             <?php
         }
+        if(isset($_SESSION['msg'])){
+            echo $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
         ?>
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered">
@@ -55,7 +59,7 @@ if (!defined('URL')) {
                             </td>
                             <td class="text-center">
                                 <span class="d-none d-md-block">
-                                    <a href="visualizar.html" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                    <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
                                     <a href="editar.html" class="btn btn-outline-warning btn-sm">Editar</a>
                                     <a href="apagar.html" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                                 </span>
@@ -64,7 +68,7 @@ if (!defined('URL')) {
                                         Ações
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                        <a class="dropdown-item" href="visualizar.html">Visualizar</a>
+                                        <a class="dropdown-item" href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>">Visualizar</a>
                                         <a class="dropdown-item" href="editar.html">Editar</a>
                                         <a class="dropdown-item" href="apagar.html" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                                     </div>
