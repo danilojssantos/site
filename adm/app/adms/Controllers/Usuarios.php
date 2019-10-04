@@ -12,14 +12,21 @@ class Usuarios
 {
 
     private $Dados;
-    public function listar()
+    private $PageId;
+
+    public function listar($PageId = null)
     {
+        $this->PageId = (int) $PageId ? $PageId : 1;
+        
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
 
-        $listarUsuario = new \App\adms\Models\AdmsListarUsuario();
-        $this->Dados['listUser'] = $listarUsuario->listarUsuario();
+        $listarUsario = new \App\adms\Models\AdmsListarUsuario();
+        $this->Dados['listUser'] = $listarUsario->listarUsuario($this->PageId);
+        $this->Dados['paginacao'] = $listarUsario->getResultadoPg();
+
         $carregarView = new \Core\ConfigView("adms/Views/usuario/listarUsuario", $this->Dados);
         $carregarView->renderizar();
     }
+
 }

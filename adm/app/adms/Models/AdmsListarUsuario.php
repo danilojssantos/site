@@ -13,7 +13,7 @@ class AdmsListarUsuario
 
     private $Resultado;
     private $PageId;
-    private $LimiteResultado = 2;
+    private $LimiteResultado = 10;
     private $ResultadoPg;
     
     function getResultadoPg()
@@ -27,8 +27,7 @@ class AdmsListarUsuario
         $this->PageId = (int) $PageId;
         $paginacao = new \App\adms\Models\helper\AdmsPaginacao(URLADM . 'usuarios/listar');
         $paginacao->condicao($this->PageId, $this->LimiteResultado);
-        $paginacao->paginacao("SELECT COUNT(id) AS num_result
-                FROM adms_usuarios ");
+        $paginacao->paginacao("SELECT COUNT(id) AS num_result FROM adms_usuarios ");
         $this->ResultadoPg = $paginacao->getResultado();
                
         $listarUsuario = new \App\adms\Models\helper\AdmsRead();
