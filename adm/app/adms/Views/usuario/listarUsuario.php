@@ -60,7 +60,7 @@ if (!defined('URL')) {
                             <td class="text-center">
                                 <span class="d-none d-md-block">
                                     <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
-                                    <a href="editar.html" class="btn btn-outline-warning btn-sm">Editar</a>
+                                    <a href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>" class="btn btn-outline-warning btn-sm">Editar</a>
                                     <a href="apagar.html" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                                 </span>
                                 <div class="dropdown d-block d-md-none">
@@ -69,7 +69,7 @@ if (!defined('URL')) {
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
                                         <a class="dropdown-item" href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>">Visualizar</a>
-                                        <a class="dropdown-item" href="editar.html">Editar</a>
+                                        <a class="dropdown-item" href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>">Editar</a>
                                         <a class="dropdown-item" href="apagar.html" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                                     </div>
                                 </div>

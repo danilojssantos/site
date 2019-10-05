@@ -8,11 +8,12 @@ if (!defined('URL')) {
 }
 
 
-class AdmsEditarPerfil
+class AdmsEditarUsuario
 {
 
     private $Resultado;
     private $Dados;
+    private $DadosId;
     private $Foto;
     private $ImgAntiga;
 
@@ -20,8 +21,18 @@ class AdmsEditarPerfil
     {
         return $this->Resultado;
     }
+    
+    public function verUsuario($DadosId)
+    {
+        $this->DadosId = (int) $DadosId;
+        $verPerfil = new \App\adms\Models\helper\AdmsRead();
+        $verPerfil->fullRead("SELECT * FROM adms_usuarios WHERE id =:id LIMIT :limit", "id=" . $this->DadosId . "&limit=1");
+        $this->Resultado = $verPerfil->getResultado();
+        return $this->Resultado;
+    }
 
-    public function altPerfil(array $Dados)
+
+    public function altUsuario(array $Dados)
     {
         $this->Dados = $Dados;
         //var_dump($this->Dados);
@@ -46,10 +57,10 @@ class AdmsEditarPerfil
 
         $valEmailUnico = new \App\adms\Models\helper\AdmsEmailUnico();
         $EditarUnico = true;
-        $valEmailUnico->valEmailUnico($this->Dados['email'], $EditarUnico, $_SESSION['usuario_id']);
+        $valEmailUnico->valEmailUnico($this->Dados['email'], $EditarUnico, $this->Dados['id']);
 
         $valUsuario = new \App\adms\Models\helper\AdmsValUsuario();
-        $valUsuario->valUsuario($this->Dados['usuario'], $EditarUnico, $_SESSION['usuario_id']);
+        $valUsuario->valUsuario($this->Dados['usuario'], $EditarUnico, $this->Dados['id']);
 
         if (( $valUsuario->getResultado()) AND ( $valEmailUnico->getResultado()) AND ( $valEmail->getResultado())) {
             $this->valFoto();
@@ -61,36 +72,33 @@ class AdmsEditarPerfil
     private function valFoto()
     {
         if (empty($this->Foto['name'])) {
-            $this->updateEditPerfil();
+            $this->updateEditUsuario();
         } else {
             $slugImg = new \App\adms\Models\helper\AdmsSlug();
             $this->Dados['imagem'] = $slugImg->nomeSlug($this->Foto['name']);
 
             $uploadImg = new \App\adms\Models\helper\AdmsUploadImgRed();
-            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/', $this->Dados['imagem'], 150, 150);
+            $uploadImg->uploadImagem($this->Foto, 'assets/imagens/usuario/' . $this->Dados['id'] . '/', $this->Dados['imagem'], 150, 150);
             if ($uploadImg->getResultado()) {
                 $apagarImg = new \App\adms\Models\helper\AdmsApagarImg();
-                $apagarImg->apagarImg('assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/' . $this->ImgAntiga);
-                $this->updateEditPerfil();
+                $apagarImg->apagarImg('assets/imagens/usuario/' . $this->Dados['id'] . '/' . $this->ImgAntiga);
+                $this->updateEditUsuario();
             } else {
                 $this->Resultado = false;
             }
         }
     }
 
-    private function updateEditPerfil()
+    private function updateEditUsuario()
     {
         $this->Dados['modified'] = date("Y-m-d H:i:s");
         $upAltSenha = new \App\adms\Models\helper\AdmsUpdate();
-        $upAltSenha->exeUpdate("adms_usuarios", $this->Dados, "WHERE id =:id", "id=" . $_SESSION['usuario_id']);
+        $upAltSenha->exeUpdate("adms_usuarios", $this->Dados, "WHERE id =:id", "id=" . $this->Dados['id']);
         if ($upAltSenha->getResultado()) {
-            $_SESSION['usuario_nome'] = $this->Dados['nome'];
-            $_SESSION['usuario_email'] = $this->Dados['email'];
-            $_SESSION['usuario_imagem'] = $this->Dados['imagem'];
-            $_SESSION['msg'] = "<div class='alert alert-success'>Perfil atualizado com sucesso!</div>";
+            $_SESSION['msg'] = "<div class='alert alert-success'>Usuário atualizado com sucesso!</div>";
             $this->Resultado = true;
         } else {
-            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: O perfil não foi atualizado!</div>";
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: O usuario não foi atualizado!</div>";
             $this->Resultado = false;
         }
     }

@@ -15,7 +15,7 @@ $(document).ready(function () {
 });
 
 function previewImagem() {
-    var imagem = document.querySelector('input[name=imagem').files[0];
+    var imagem = document.querySelector('input[name=imagem_nova').files[0];
     var preview = document.querySelector('#preview-user');
 
     var reader = new FileReader();

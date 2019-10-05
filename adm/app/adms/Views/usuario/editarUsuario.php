@@ -1,11 +1,19 @@
+<?php
+if (isset($this->Dados['form'])) {
+    $valorForm = $this->Dados['form'];
+}
+if (isset($this->Dados['form'][0])) {
+    $valorForm = $this->Dados['form'][0];
+}
+?>
 <div class="content p-1">
     <div class="list-group-item">
         <div class="d-flex">
             <div class="mr-auto p-2">
-                <h2 class="display-4 titulo">Editar Perfil</h2>
+                <h2 class="display-4 titulo">Editar Usuário</h2>
             </div>
             <div class="p-2">
-                <a href="<?php echo URLADM . 'ver-perfil/perfil'; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $valorForm['id']; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
             </div>
         </div><hr>
         <?php
@@ -13,14 +21,13 @@
             echo $_SESSION['msg'];
             unset($_SESSION['msg']);
         }
-        if (isset($this->Dados['form'])) {
-            $valorForm = $this->Dados['form'];
-        }
-        if (isset($this->Dados['form'][0])) {
-            $valorForm = $this->Dados['form'][0];
-        }
         ?>
         <form method="POST" action="" enctype="multipart/form-data"> 
+            <input name="id" type="hidden" value="<?php
+                    if (isset($valorForm['id'])) {
+                        echo $valorForm['id'];
+                    }
+                    ?>">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label><span class="text-danger">*</span> Nome</label>
@@ -72,13 +79,15 @@
                     <input name="imagem_nova" type="file" onchange="previewImagem();">
                 </div>
                 <div class="form-group col-md-6">
-<?php
-if (isset($valorForm['imagem']) AND ! empty($valorForm['imagem'])) {
-    $imagem_antiga = URLADM . 'assets/imagens/usuario/' . $_SESSION['usuario_id'] . '/' . $_SESSION['usuario_imagem'];
-} else {
-    $imagem_antiga = URLADM . 'assets/imagens/usuario/preview_img.png';
-}
-?>
+                    <?php
+                    if (isset($valorForm['imagem']) AND ! empty($valorForm['imagem'])) {
+                        $imagem_antiga = URLADM . 'assets/imagens/usuario/' . $valorForm['id'] . '/' . $valorForm['imagem'];
+                    }elseif (isset($valorForm['imagem_antiga']) AND ! empty($valorForm['imagem_antiga'])) {
+                        $imagem_antiga = URLADM . 'assets/imagens/usuario/' . $valorForm['id'] . '/' . $valorForm['imagem_antiga'];
+                    } else {
+                        $imagem_antiga = URLADM . 'assets/imagens/usuario/preview_img.png';
+                    }
+                    ?>
                     <img src="<?php echo $imagem_antiga; ?>" alt="Imagem do Usuário" id="preview-user" class="img-thumbnail" style="width: 150px; height: 150px;">
                 </div>
             </div>
@@ -86,7 +95,7 @@ if (isset($valorForm['imagem']) AND ! empty($valorForm['imagem'])) {
             <p>
                 <span class="text-danger">* </span>Campo obrigatório
             </p>
-            <input name="EdiPerfil" type="submit" class="btn btn-warning" value="Salvar">
+            <input name="EditUsuario" type="submit" class="btn btn-warning" value="Salvar">
         </form>
     </div>
 </div>

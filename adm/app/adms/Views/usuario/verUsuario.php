@@ -3,45 +3,45 @@ if (!defined('URL')) {
     header("Location: /");
     exit();
 }
-?>
-<div class="content p-1">
-    <div class="list-group-item">
-        <div class="d-flex">
-            <div class="mr-auto p-2">
-                <h2 class="display-4 titulo">Ver Usuário</h2>
-            </div>
-            <div class="p-2">
-                <span class="d-none d-md-block">
-                    <a href="<?php echo URLADM . 'editar-perfil/alt-perfil'; ?>" class="btn btn-outline-warning btn-sm">Editar</a>
-                    <a href="<?php echo URLADM . 'alterar-senha/alt-senha'; ?>" class="btn btn-outline-danger btn-sm">Editar a Senha</a>
-                </span>
-                <div class="dropdown d-block d-md-none">
-                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Ações
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">    
-                        <a class="dropdown-item" href="<?php echo URLADM . 'editar-perfil/alt-perfil'; ?>">Editar</a>
-                        <a class="dropdown-item" href="<?php echo URLADM . 'alterar-senha/alt-senha'; ?>">Editar a Senha</a>
+if (!empty($this->Dados['dados_usuario'][0])) {
+    extract($this->Dados['dados_usuario'][0]);
+    ?>
+    <div class="content p-1">
+        <div class="list-group-item">
+            <div class="d-flex">
+                <div class="mr-auto p-2">
+                    <h2 class="display-4 titulo">Ver Usuário</h2>
+                </div>
+                <div class="p-2">
+                    <span class="d-none d-md-block">
+                        <a href="<?php echo URLADM . 'usuarios/listar'; ?>" class="btn btn-outline-info btn-sm">Listar</a>
+                        <a href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>" class="btn btn-outline-warning btn-sm">Editar</a>
+                        <a href="<?php echo URLADM . 'editar-senha/edit-senha/' . $id; ?>" class="btn btn-outline-danger btn-sm">Editar a Senha</a>
+                    </span>
+                    <div class="dropdown d-block d-md-none">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ações
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">    
+                            <a class="dropdown-item" href="<?php echo URLADM . 'usuarios/listar'; ?>">Listar</a>
+                            <a class="dropdown-item" href="<?php echo URLADM . 'editar-perfil/alt-perfil'; ?>">Editar</a>
+                            <a class="dropdown-item" href="<?php echo URLADM . 'editar-senha/edit-senha'; ?>">Editar a Senha</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><hr>
-        <?php
-        if (isset($_SESSION['msg'])) {
-            echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-        }
-        ?>
-        <dl class="row">
+            </div><hr>
             <?php
-            if (!empty($this->Dados['dados_usuario'][0])) {
-                extract($this->Dados['dados_usuario'][0]);
-                ?>
+            if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            ?>
+            <dl class="row">
                 <dt class="col-sm-3">Foto</dt>
                 <dd class="col-sm-9">                    
                     <?php
-                    if (!empty($_SESSION['usuario_imagem'])) {
-                        echo "<img src='" . URLADM . "assets/imagens/usuario/" . $_SESSION['usuario_id'] . "/" . $_SESSION['usuario_imagem'] . "' witdh='150' height='150'>";
+                    if (!empty($imagem)) {
+                        echo "<img src='" . URLADM . "assets/imagens/usuario/" . $id . "/" . $imagem . "' witdh='150' height='150'>";
                     } else {
                         echo "<img src='" . URLADM . "assets/imagens/usuario/icone_usuario.png' witdh='150' height='150'>";
                     }
@@ -63,11 +63,39 @@ if (!defined('URL')) {
                 <dt class="col-sm-3">Usuário</dt>
                 <dd class="col-sm-9"><?php echo $usuario; ?></dd>
 
+                <dt class="col-sm-3">Recuperar Senha</dt>
+                <dd class="col-sm-9"><?php
+                    if (!empty($recuperar_senha)) {
+                        echo URLADM . "atual-senha/atual-senha?chave=" . $recuperar_senha;
+                    }
+                    ?></dd>
+
                 <dt class="col-sm-3">Nível de Acesso</dt>
-                <dd class="col-sm-9"><?php echo $adms_niveis_acesso_id; ?></dd>
-                <?php
-            }
-            ?>
-        </dl>
+                <dd class="col-sm-9"><?php echo $nome_nivac; ?></dd>
+
+                <dt class="col-sm-3">Situação</dt>
+                <dd class="col-sm-9">
+                    <span class="badge badge-<?php echo $cor_cr; ?>"><?php echo $nome_sit; ?></span>
+                </dd>
+
+                <dt class="col-sm-3">Inserido</dt>
+                <dd class="col-sm-9"><?php echo date('d/m/Y H:i:s', strtotime($created)); ?></dd>
+
+                <dt class="col-sm-3">Alterado</dt>
+                <dd class="col-sm-9"><?php
+                    if (!empty($modified)) {
+                        echo date('d/m/Y H:i:s', strtotime($modified));
+                    }
+                    ?>
+                </dd>
+            </dl>
+
+
+        </div>
     </div>
-</div>
+    <?php
+} else {
+    $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não encontrado!</div>";
+    $UrlDestino = URLADM . 'usuarios/listar';
+    header("Location: $UrlDestino");
+}
