@@ -13,6 +13,7 @@ class EditarUsuario
 
     private $Dados;
     private $DadosId;
+    private $Registro;
 
     public function editUsuario($DadosId = null)
     {
@@ -40,20 +41,24 @@ class EditarUsuario
                 header("Location: $UrlDestino");
             } else {
                 $this->Dados['form'] = $this->Dados;
-                $listarMenu = new \App\adms\Models\AdmsMenu();
-                $this->Dados['menu'] = $listarMenu->itemMenu();
-                $carregarView = new \Core\ConfigView("adms/Views/usuario/editarUsuario", $this->Dados);
-                $carregarView->renderizar();
+                $this->editUsuarioViewPriv();
             }
         } else {
             $verUsuario = new \App\adms\Models\AdmsEditarUsuario();
             $this->Dados['form'] = $verUsuario->verUsuario($this->DadosId);
-            //$this->Dados['form'] = $this->DadosId;
-            $listarMenu = new \App\adms\Models\AdmsMenu();
-            $this->Dados['menu'] = $listarMenu->itemMenu();
-            $carregarView = new \Core\ConfigView("adms/Views/usuario/editarUsuario", $this->Dados);
-            $carregarView->renderizar();
+            $this->editUsuarioViewPriv();
         }
+    }
+
+    private function editUsuarioViewPriv()
+    {
+        $listarSelect = new \App\adms\Models\AdmsEditarUsuario();
+        $this->Dados['select'] = $listarSelect->listarCadastrar();
+       
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $carregarView = new \Core\ConfigView("adms/Views/usuario/editarUsuario", $this->Dados);
+        $carregarView->renderizar();
     }
 
 }

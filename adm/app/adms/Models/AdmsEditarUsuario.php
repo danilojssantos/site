@@ -21,7 +21,7 @@ class AdmsEditarUsuario
     {
         return $this->Resultado;
     }
-    
+
     public function verUsuario($DadosId)
     {
         $this->DadosId = (int) $DadosId;
@@ -30,7 +30,6 @@ class AdmsEditarUsuario
         $this->Resultado = $verPerfil->getResultado();
         return $this->Resultado;
     }
-
 
     public function altUsuario(array $Dados)
     {
@@ -101,6 +100,20 @@ class AdmsEditarUsuario
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: O usuario não foi atualizado!</div>";
             $this->Resultado = false;
         }
+    }
+
+    public function listarCadastrar()
+    {
+        $listar = new \App\adms\Models\helper\AdmsRead();
+        $listar->fullRead("SELECT id id_nivac, nome nome_nivac FROM adms_niveis_acessos ORDER BY nome ASC");
+        $registro['nivac'] = $listar->getResultado();
+        
+        $listar->fullRead("SELECT id id_sit, nome nome_sit FROM adms_sits_usuarios ORDER BY nome ASC");
+        $registro['sit'] = $listar->getResultado();
+        
+        $this->Resultado = ['nivac' => $registro['nivac'], 'sit' =>  $registro['sit']];
+        
+        return $this->Resultado;
     }
 
 }

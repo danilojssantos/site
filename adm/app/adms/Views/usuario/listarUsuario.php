@@ -10,7 +10,7 @@ if (!defined('URL')) {
             <div class="mr-auto p-2">
                 <h2 class="display-4 titulo">Listar Usuários</h2>
             </div>
-            <a href="cadastrar.html">
+            <a href="<?php echo URLADM . 'cadastrar-usuario/cad-usuario'; ?>">
                 <div class="p-2">
                     <button class="btn btn-outline-success btn-sm">
                         Cadastrar
