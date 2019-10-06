@@ -12,7 +12,7 @@ class AdmsDelete extends AdmsConn
 {
 
     private $Tabela;
-    private $Termos;
+    private $Termos; 
     private $Values;
     private $Resultado;
     private $Query;
@@ -37,7 +37,7 @@ class AdmsDelete extends AdmsConn
         $this->Query = "DELETE FROM {$this->Tabela} {$this->Termos}";
         $this->conexao();
         try {
-            $this->Query->execute($this->Query);
+            $this->Query->execute($this->Values);
             $this->Resultado = true;
         } catch (Exception $ex) {
             $this->Resultado = false;

@@ -61,7 +61,7 @@ if (!defined('URL')) {
                                 <span class="d-none d-md-block">
                                     <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
                                     <a href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>" class="btn btn-outline-warning btn-sm">Editar</a>
-                                    <a href="apagar.html" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                                    <a href="<?php echo URLADM . 'apagar-usuario/apagar-usuario/' . $id; ?>" class="btn btn-outline-danger btn-sm" data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a>
                                 </span>
                                 <div class="dropdown d-block d-md-none">
                                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
