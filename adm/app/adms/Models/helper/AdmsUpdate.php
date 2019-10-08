@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsUpdate
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsUpdate extends AdmsConn
 {
 

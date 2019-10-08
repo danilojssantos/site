@@ -29,9 +29,15 @@ class AdmsListarPermi
 
         $paginacao = new \App\adms\Models\helper\AdmsPaginacao(URLADM . 'permissoes/listar', "?niv=" . $this->NivId);
         $paginacao->condicao($this->PageId, $this->LimiteResultado);
-        $paginacao->paginacao("SELECT COUNT(id) AS num_result 
-                FROM adms_nivacs_pgs
-                WHERE adms_niveis_acesso_id =:adms_niveis_acesso_id", "adms_niveis_acesso_id={$this->NivId}");
+        $paginacao->paginacao("SELECT COUNT(nivpg.id) AS num_result 
+                FROM adms_nivacs_pgs nivpg
+                INNER JOIN adms_paginas pg ON pg.id=nivpg.adms_pagina_id
+                INNER JOIN adms_niveis_acessos nivac ON nivac.id=nivpg.adms_niveis_acesso_id
+                WHERE nivpg.adms_niveis_acesso_id =:adms_niveis_acesso_id 
+		AND nivac.ordem >=:ordem
+                AND (((SELECT permissao FROM adms_nivacs_pgs WHERE adms_pagina_id=nivpg.adms_pagina_id AND adms_niveis_acesso_id={$_SESSION['adms_niveis_acesso_id']}) = 1) OR (pg.lib_pub = 1))
+                    
+                ", "adms_niveis_acesso_id={$this->NivId}&ordem=".$_SESSION['ordem_nivac']);
         $this->ResultadoPg = $paginacao->getResultado();
 
         $listarUsuario = new \App\adms\Models\helper\AdmsRead();
@@ -39,8 +45,10 @@ class AdmsListarPermi
                 pg.nome_pagina, pg.obs obs_pg
                 FROM adms_nivacs_pgs nivpg 
                 INNER JOIN adms_paginas pg ON pg.id=nivpg.adms_pagina_id
-                WHERE adms_niveis_acesso_id =:adms_niveis_acesso_id
-                ORDER BY nivpg.ordem ASC LIMIT :limit OFFSET :offset", "adms_niveis_acesso_id={$this->NivId}&limit={$this->LimiteResultado}&offset={$paginacao->getOffset()}");
+                INNER JOIN adms_niveis_acessos nivac ON nivac.id=nivpg.adms_niveis_acesso_id
+                WHERE nivpg.adms_niveis_acesso_id =:adms_niveis_acesso_id AND nivac.ordem >=:ordem
+                AND (((SELECT permissao FROM adms_nivacs_pgs WHERE adms_pagina_id=nivpg.adms_pagina_id AND adms_niveis_acesso_id={$_SESSION['adms_niveis_acesso_id']}) = 1) OR (pg.lib_pub = 1))
+                ORDER BY nivpg.ordem ASC LIMIT :limit OFFSET :offset", "adms_niveis_acesso_id={$this->NivId}&ordem=".$_SESSION['ordem_nivac']."&limit={$this->LimiteResultado}&offset={$paginacao->getOffset()}");
         $this->Resultado = $listarUsuario->getResultado();
         return $this->Resultado;
     }

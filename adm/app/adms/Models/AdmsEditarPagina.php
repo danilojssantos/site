@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsEditarPagina: 
- * Classe para editar as informações da página no banco de dados
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsEditarPagina
 {
 

@@ -23,7 +23,8 @@ class NivelAcesso
             'edit_nivac' => ['menu_controller' => 'editar-niv-ac', 'menu_metodo' => 'edit-niv-ac'],
             'del_nivac' => ['menu_controller' => 'apagar-niv-ac', 'menu_metodo' => 'apagar-niv-ac'],
             'ordem_nivac' => ['menu_controller' => 'alt-ordem-niv-ac', 'menu_metodo' => 'alt-ordem-niv-ac'],
-            'list_permi' => ['menu_controller' => 'permissoes', 'menu_metodo' => 'listar']];
+            'list_permi' => ['menu_controller' => 'permissoes', 'menu_metodo' => 'listar'],
+            'sincro_permi' => ['menu_controller' => 'sincro-pg-niv-ac', 'menu_metodo' => 'sincro-pg-niv-ac']];
         $listarBotao = new \App\adms\Models\AdmsBotao();
         $this->Dados['botao'] = $listarBotao->valBotao($botao);
 

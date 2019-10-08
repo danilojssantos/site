@@ -10,19 +10,33 @@ if (!defined('URL')) {
             <div class="mr-auto p-2">
                 <h2 class="display-4 titulo">Listar Nível de Acesso</h2>
             </div>
-            <?php
-            if ($this->Dados['botao']['cad_nivac']) {
-                ?>
-                <a href="<?php echo URLADM . 'cadastrar-niv-ac/cad-niv-ac'; ?>">
-                    <div class="p-2">
-                        <button class="btn btn-outline-success btn-sm">
-                            Cadastrar
-                        </button>
+            <div class="p-2">
+                <span class="d-none d-md-block">
+                    <?php
+                    if ($this->Dados['botao']['sincro_permi']) {
+                        echo "<a href='" . URLADM . "sincro-pg-niv-ac/sincro-pg-niv-ac' class='btn btn-outline-warning btn-sm'>Sincronizar</a> ";
+                    }
+                    if ($this->Dados['botao']['cad_nivac']) {
+                        echo "<a href='" . URLADM . "cadastrar-niv-ac/cad-niv-ac' class='btn btn-outline-success btn-sm'>Cadastrar</a> ";
+                    }
+                    ?>
+                </span>
+                <div class="dropdown d-block d-md-none">
+                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ações
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar"> 
+                        <?php
+                        if ($this->Dados['botao']['sincro_permi']) {
+                            echo "<a class='dropdown-item' href='" . URLADM . "sincro-pg-niv-ac/sincro-pg-niv-ac'>Sincronizar</a>";
+                        }
+                        if ($this->Dados['botao']['cad_nivac']) {
+                            echo "<a class='dropdown-item' href='" . URLADM . "cadastrar-niv-ac/cad-niv-ac'>Cadastrar</a>";
+                        }
+                        ?>
                     </div>
-                </a>
-                <?php
-            }
-            ?>
+                </div>
+            </div>
 
         </div>
         <?php

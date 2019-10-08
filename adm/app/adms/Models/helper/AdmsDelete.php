@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsDelete
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsDelete extends AdmsConn
 {
 

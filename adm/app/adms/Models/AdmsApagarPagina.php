@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsApagarPagina: 
- * Classe para apagar página do administrativo
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsApagarPagina
 {
 

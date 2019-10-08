@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsAtualSenha
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsAtualSenha
 {
 

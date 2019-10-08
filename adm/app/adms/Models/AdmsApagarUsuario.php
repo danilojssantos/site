@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsApagarUsuario
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsApagarUsuario
 {
 

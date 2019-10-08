@@ -10,11 +10,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsPhpMailer
- *
- * @author Celke
- */
+
 class AdmsPhpMailer
 {
 

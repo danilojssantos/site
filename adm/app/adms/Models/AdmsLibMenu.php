@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsLibMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsLibMenu
 {
 

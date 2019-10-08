@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsLibDropdown
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsLibDropdown
 {
 

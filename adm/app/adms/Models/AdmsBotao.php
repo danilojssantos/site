@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsBotao
 {
     private $Resultado;
