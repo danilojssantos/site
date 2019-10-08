@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsCreate
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsCreate extends AdmsConn
 {
     private $Tabela;

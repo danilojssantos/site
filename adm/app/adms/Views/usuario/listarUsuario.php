@@ -10,16 +10,23 @@ if (!defined('URL')) {
             <div class="mr-auto p-2">
                 <h2 class="display-4 titulo">Listar Usuários</h2>
             </div>
-            <a href="<?php echo URLADM . 'cadastrar-usuario/cad-usuario'; ?>">
-                <div class="p-2">
-                    <button class="btn btn-outline-success btn-sm">
-                        Cadastrar
-                    </button>
-                </div>
-            </a>
+            <?php
+            if ($this->Dados['botao']['cad_usuario']) {
+                ?>
+                <a href="<?php echo URLADM . 'cadastrar-usuario/cad-usuario'; ?>">
+                    <div class="p-2">
+                        <button class="btn btn-outline-success btn-sm">
+                            Cadastrar
+                        </button>
+                    </div>
+                </a>
+                <?php
+            }
+            ?>
+
         </div>
         <?php
-        if(empty($this->Dados['listUser'])) {
+        if (empty($this->Dados['listUser'])) {
             ?>
             <div class="alert alert-danger" role="alert">
                 Nenhum usuário encontrado!
@@ -29,7 +36,7 @@ if (!defined('URL')) {
             </div>
             <?php
         }
-        if(isset($_SESSION['msg'])){
+        if (isset($_SESSION['msg'])) {
             echo $_SESSION['msg'];
             unset($_SESSION['msg']);
         }
@@ -59,18 +66,36 @@ if (!defined('URL')) {
                             </td>
                             <td class="text-center">
                                 <span class="d-none d-md-block">
-                                    <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
-                                    <a href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>" class="btn btn-outline-warning btn-sm">Editar</a>
-                                    <a href="<?php echo URLADM . 'apagar-usuario/apagar-usuario/' . $id; ?>" class="btn btn-outline-danger btn-sm" data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a>
+                                    <?php
+                                    if ($this->Dados['botao']['vis_usuario']) {
+                                        echo "<a href='". URLADM . "ver-usuario/ver-usuario/$id' class='btn btn-outline-primary btn-sm'>Visualizar</a> ";
+                                    }
+                                    if ($this->Dados['botao']['edit_usuario']) {
+                                        echo "<a href='". URLADM . "editar-usuario/edit-usuario/$id' class='btn btn-outline-warning btn-sm'>Editar</a> ";
+                                    }
+                                    if ($this->Dados['botao']['del_usuario']) {
+                                        echo "<a href='". URLADM . "apagar-usuario/apagar-usuario/$id' class='btn btn-outline-danger btn-sm' data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> ";
+                                    }
+                                    ?>
                                 </span>
                                 <div class="dropdown d-block d-md-none">
                                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Ações
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                        <a class="dropdown-item" href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $id; ?>">Visualizar</a>
-                                        <a class="dropdown-item" href="<?php echo URLADM . 'editar-usuario/edit-usuario/' . $id; ?>">Editar</a>
-                                        <a class="dropdown-item" href="apagar.html" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                                        <?php
+                                        if ($this->Dados['botao']['vis_usuario']) {
+                                            echo "<a class='dropdown-item' href='". URLADM . "ver-usuario/ver-usuario/$id'>Visualizar</a>";
+                                        }
+                                        if ($this->Dados['botao']['edit_usuario']) {
+                                            echo "<a class='dropdown-item' href='". URLADM . "editar-usuario/edit-usuario/$id'>Editar</a>";
+                                        }
+                                        if ($this->Dados['botao']['del_usuario']) {
+                                            echo "<a class='dropdown-item' href='". URLADM . "apagar-usuario/apagar-usuario/$id' data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a>";                                           
+                                        }
+                                        ?>
+                                        
+                                       
                                     </div>
                                 </div>
                             </td>

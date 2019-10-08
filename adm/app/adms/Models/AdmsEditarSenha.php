@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsEditarSenha
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsEditarSenha
 {
 
@@ -24,7 +28,9 @@ class AdmsEditarSenha
     {
         $this->DadosId = (int) $DadosId;
         $validaUsuario = new \App\adms\Models\helper\AdmsRead();
-        $validaUsuario->fullRead("SELECT id FROM adms_usuarios WHERE id =:id", "id={$this->DadosId}");
+        $validaUsuario->fullRead("SELECT user.id FROM adms_usuarios user
+                INNER JOIN adms_niveis_acessos nivac ON nivac.id=user.adms_niveis_acesso_id
+                WHERE user.id =:id AND nivac.ordem >:ordem LIMIT :limit", "id=" . $this->DadosId . "&ordem=".$_SESSION['ordem_nivac']."&limit=1");
         $this->DadosUsuario = $validaUsuario->getResultado();
         if (!empty($this->DadosUsuario)) {
             $this->Resultado = true;

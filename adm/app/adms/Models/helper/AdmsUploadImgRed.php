@@ -7,6 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
+/**
+ * Description of AdmsUploadImg
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsUploadImgRed
 {
     private $DadosImagem;
@@ -17,30 +22,28 @@ class AdmsUploadImgRed
     private $Largura;
     private $Altura;
     private $ImgRedimens;
-
+            
     function getResultado()
     {
         return $this->Resultado;
     }
 
-    public function uploadImagem(array $Imagem, $Diretorio, $NomeImg, $Largura, $Altura)
+        public function uploadImagem(array $Imagem, $Diretorio, $NomeImg, $Largura, $Altura )
     {
         $this->DadosImagem = $Imagem;
         $this->Diretorio = $Diretorio;
         $this->NomeImg = $NomeImg;
         $this->Largura = $Largura;
         $this->Altura = $Altura;
-        $this->ValidarImagem();
-        if ($this->Imagem) {
+        $this->validarImagem();
+        if($this->Imagem){
             $this->Resultado = true;
-        } else {
+        }else{
             $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: A extensão da imagem é inválida. Selecione um imagem JPEG ou PNG!</div>";
             $this->Resultado = false;
         }
-        
     }
-
-
+    
     private function validarImagem()
     {
         switch ($this->DadosImagem['type']):
@@ -60,7 +63,7 @@ class AdmsUploadImgRed
                 break;            
         endswitch;        
     }
-
+    
     private function valDiretorio()
     {
         if(!file_exists($this->Diretorio) && !is_dir($this->Diretorio)){
@@ -72,7 +75,9 @@ class AdmsUploadImgRed
     {
         $largura_original = imagesx($this->Imagem);
         $altura_original = imagesy($this->Imagem);
-        $this->ImgRedimens = imagecreatetruecolor($this->Largura, $this->Altura);    
+        
+        $this->ImgRedimens = imagecreatetruecolor($this->Largura, $this->Altura);
+        
         imagecopyresampled($this->ImgRedimens, $this->Imagem, 0, 0, 0, 0, $this->Largura, $this->Altura, $largura_original, $altura_original);
     }
 }

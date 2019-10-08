@@ -13,7 +13,7 @@
         ?>
         <div class="form-group">
             <label>E-mail</label>
-            <input name="email" type="text" class="form-control" placeholder="Digite o e-mail cadastrado" value="<?php if (isset($valorForm['email'])) {
+            <input name="email" type="email" class="form-control" placeholder="Digite o e-mail cadastrado" value="<?php if (isset($valorForm['email'])) {
             echo $valorForm['email'];
         } ?>"> 
         </div>

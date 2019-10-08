@@ -5,7 +5,7 @@ if (isset($this->Dados['form'])) {
 if (isset($this->Dados['form'][0])) {
     $valorForm = $this->Dados['form'][0];
 }
-
+//var_dump($this->Dados['select']);
 ?>
 <div class="content p-1">
     <div class="list-group-item">
@@ -13,9 +13,17 @@ if (isset($this->Dados['form'][0])) {
             <div class="mr-auto p-2">
                 <h2 class="display-4 titulo">Cadastrar Usuário</h2>
             </div>
-            <div class="p-2">
+            <?php
+            if ($this->Dados['botao']['list_usuario']) {
+                ?>
+                <div class="p-2">
                 <a href="<?php echo URLADM . 'usuarios/listar'; ?>" class="btn btn-outline-info btn-sm">Listar</a>
             </div>
+                <?php
+            }
+            ?>
+            
+            
         </div><hr>
         <?php
         if (isset($_SESSION['msg'])) {

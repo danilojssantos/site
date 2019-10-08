@@ -7,12 +7,16 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsDelete
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsDelete extends AdmsConn
 {
 
     private $Tabela;
-    private $Termos; 
+    private $Termos;
     private $Values;
     private $Resultado;
     private $Query;

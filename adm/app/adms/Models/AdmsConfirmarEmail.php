@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsConfirmarEmail
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsConfirmarEmail
 {
     private $DadosChave;

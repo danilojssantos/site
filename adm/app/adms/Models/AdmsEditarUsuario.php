@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsEditarUsuario
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsEditarUsuario
 {
 
@@ -26,7 +30,9 @@ class AdmsEditarUsuario
     {
         $this->DadosId = (int) $DadosId;
         $verPerfil = new \App\adms\Models\helper\AdmsRead();
-        $verPerfil->fullRead("SELECT * FROM adms_usuarios WHERE id =:id LIMIT :limit", "id=" . $this->DadosId . "&limit=1");
+        $verPerfil->fullRead("SELECT user.* FROM adms_usuarios user
+                INNER JOIN adms_niveis_acessos nivac ON nivac.id=user.adms_niveis_acesso_id
+                WHERE user.id =:id AND nivac.ordem >:ordem LIMIT :limit", "id=" . $this->DadosId . "&ordem=".$_SESSION['ordem_nivac']."&limit=1");
         $this->Resultado = $verPerfil->getResultado();
         return $this->Resultado;
     }
@@ -105,7 +111,7 @@ class AdmsEditarUsuario
     public function listarCadastrar()
     {
         $listar = new \App\adms\Models\helper\AdmsRead();
-        $listar->fullRead("SELECT id id_nivac, nome nome_nivac FROM adms_niveis_acessos ORDER BY nome ASC");
+        $listar->fullRead("SELECT id id_nivac, nome nome_nivac FROM adms_niveis_acessos WHERE ordem >=:ordem ORDER BY nome ASC", "ordem=" . $_SESSION['ordem_nivac']);
         $registro['nivac'] = $listar->getResultado();
         
         $listar->fullRead("SELECT id id_sit, nome nome_sit FROM adms_sits_usuarios ORDER BY nome ASC");

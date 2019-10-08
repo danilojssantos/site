@@ -9,7 +9,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsRead
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsRead extends AdmsConn
 {
 

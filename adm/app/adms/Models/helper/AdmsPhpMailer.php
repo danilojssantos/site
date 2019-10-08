@@ -10,7 +10,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsPhpMailer
+ *
+ * @author Celke
+ */
 class AdmsPhpMailer
 {
 
@@ -46,7 +50,7 @@ class AdmsPhpMailer
             //Server settings
             //$mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host =          $this->DadosCredEmail[0]['host'];  // Specify main and backup SMTP servers
+            $mail->Host = $this->DadosCredEmail[0]['host'];  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = $this->DadosCredEmail[0]['usuario'];                 // SMTP username
             $mail->Password = $this->DadosCredEmail[0]['senha'];                           // SMTP password
@@ -63,11 +67,11 @@ class AdmsPhpMailer
             $mail->AltBody = $this->Dados['cont_text_email'];
 
             if ($mail->send()) {
-                //echo 'Messagem enviada com sucesso';
+                $_SESSION['msg'] = "<div class='alert alert-success'>E-mail enviado com sucesso!</div>";
                 $this->Resultado = true;
             } else {
+                $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: E-mail não foi enviado com sucesso!</div>";
                 $this->Resultado = false;
-                //echo 'Erro Messagem nao foi enviada com sucesso';
             }
         } catch (Exception $e) {
             $this->Resultado = false;

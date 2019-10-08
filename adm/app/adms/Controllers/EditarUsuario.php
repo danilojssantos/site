@@ -7,13 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
 class EditarUsuario
 {
 
     private $Dados;
     private $DadosId;
-    private $Registro;
 
     public function editUsuario($DadosId = null)
     {
@@ -52,13 +50,23 @@ class EditarUsuario
 
     private function editUsuarioViewPriv()
     {
-        $listarSelect = new \App\adms\Models\AdmsEditarUsuario();
-        $this->Dados['select'] = $listarSelect->listarCadastrar();
-       
-        $listarMenu = new \App\adms\Models\AdmsMenu();
-        $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/usuario/editarUsuario", $this->Dados);
-        $carregarView->renderizar();
+        if ($this->Dados['form']) {
+            $listarSelect = new \App\adms\Models\AdmsEditarUsuario();
+            $this->Dados['select'] = $listarSelect->listarCadastrar();
+            
+            $botao = ['vis_usuario' => ['menu_controller' => 'ver-usuario', 'menu_metodo' => 'ver-usuario']];
+            $listarBotao = new \App\adms\Models\AdmsBotao();
+            $this->Dados['botao'] = $listarBotao->valBotao($botao);
+
+            $listarMenu = new \App\adms\Models\AdmsMenu();
+            $this->Dados['menu'] = $listarMenu->itemMenu();
+            $carregarView = new \Core\ConfigView("adms/Views/usuario/editarUsuario", $this->Dados);
+            $carregarView->renderizar();
+        } else {
+            $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Usuário não encontrado!</div>";
+            $UrlDestino = URLADM . 'usuarios/listar';
+            header("Location: $UrlDestino");
+        }
     }
 
 }

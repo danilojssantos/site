@@ -1,10 +1,8 @@
 <?php
-
 if (!defined('URL')) {
     header("Location: /");
     exit();
 }
-
 ?>
 <div class="content p-1">
     <div class="list-group-item">

@@ -2,11 +2,7 @@
 
 namespace Core;
 
-/**
- * Description of ConfigController
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class ConfigController
 {
 

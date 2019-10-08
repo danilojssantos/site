@@ -38,6 +38,10 @@ class CadastrarUsuario
         $listarSelect = new \App\adms\Models\AdmsCadastrarUsuario();
         $this->Dados['select'] = $listarSelect->listarCadastrar();
        
+        $botao = ['list_usuario' => ['menu_controller' => 'usuarios', 'menu_metodo' => 'listar']];
+        $listarBotao = new \App\adms\Models\AdmsBotao();
+        $this->Dados['botao'] = $listarBotao->valBotao($botao);
+        
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
         $carregarView = new \Core\ConfigView("adms/Views/usuario/cadUsuario", $this->Dados);
@@ -45,4 +49,3 @@ class CadastrarUsuario
     }
 
 }
-

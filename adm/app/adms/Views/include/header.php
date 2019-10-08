@@ -1,17 +1,14 @@
 <?php
-
 if (!defined('URL')) {
     header("Location: /");
     exit();
 }
-
 ?>
-
 <nav class="navbar navbar-expand navbar-dark bg-primary">
     <a class="sidebar-toggle text-light mr-3">
         <span class="navbar-toggler-icon"></span>
     </a>
-    <a class="navbar-brand" href="#">DaniloJoaquim.com.br</a>
+    <a class="navbar-brand" href="#">DaniloJoaquim</a>
 
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
@@ -29,7 +26,7 @@ if (!defined('URL')) {
                             ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="<?php echo URLADM . 'ver-perfil/perfil'; ?>"><i class="fas fa-user"></i> Perfil</a>
+                    <a class="dropdown-item" href="<?php echo URLADM . 'ver-perfil/perfil'; ?>"><i class="fas fa-user"></i> Perfil</a>
                     <a class="dropdown-item" href="<?php echo URLADM . 'login/logout'; ?>"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </li>

@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsPaginacao
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsPaginacao
 {
 
@@ -21,6 +25,7 @@ class AdmsPaginacao
     private $Resultado;
     private $TotalPaginas;
     private $MaxLinks = 2;
+    private $Var;
 
     function getResultado()
     {
@@ -32,9 +37,10 @@ class AdmsPaginacao
         return $this->Offset;
     }
 
-    function __construct($Link)
+    function __construct($Link, $Var = null)
     {
         $this->Link = $Link;
+        $this->Var = $Var;
     }
 
     public function condicao($Pagina, $LimiteResultado)
@@ -73,11 +79,11 @@ class AdmsPaginacao
         $this->Resultado = "<nav aria-label='paginacao'>";
         $this->Resultado .= "<ul class='pagination pagination-sm justify-content-center'>";
         $this->Resultado .= "<li class='page-item'>";
-        $this->Resultado .= "<a class='page-link' href='" . $this->Link . "' tabindex='-1'>Primeira</a>";
+        $this->Resultado .= "<a class='page-link' href='" . $this->Link . $this->Var . "' tabindex='-1'>Primeira</a>";
         $this->Resultado .= "</li>";
         for ($iPag = $this->Pagina - $this->MaxLinks; $iPag <= $this->Pagina - 1; $iPag++) {
             if ($iPag >= 1) {
-                $this->Resultado .= "<li class='page-item'><a class='page-link' href='" . $this->Link . "/" . $iPag . "'>$iPag</a></li>";
+                $this->Resultado .= "<li class='page-item'><a class='page-link' href='" . $this->Link . "/" . $iPag . $this->Var . "'>$iPag</a></li>";
             }
         }
 
@@ -86,11 +92,11 @@ class AdmsPaginacao
         $this->Resultado .= "</li>";
         for ($dPag = $this->Pagina + 1; $dPag <= $this->Pagina + $this->MaxLinks; $dPag++) {
             if ($dPag <= $this->TotalPaginas) {
-                $this->Resultado .= "<li class='page-item'><a class='page-link' href='" . $this->Link . "/" . $dPag . "'>$dPag</a></li>";
+                $this->Resultado .= "<li class='page-item'><a class='page-link' href='" . $this->Link . "/" . $dPag . $this->Var . "'>$dPag</a></li>";
             }
         }
         $this->Resultado .= "<li class='page-item'>";
-        $this->Resultado .= "<a class='page-link' href='" . $this->Link . "/" . $this->TotalPaginas . "'>Última</a>";
+        $this->Resultado .= "<a class='page-link' href='" . $this->Link . "/" . $this->TotalPaginas . $this->Var . "'>Última</a>";
         $this->Resultado .= "</li>";
         $this->Resultado .= "</ul>";
         $this->Resultado .= "</nav>";

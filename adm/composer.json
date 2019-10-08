@@ -3,8 +3,8 @@
     "description": "Projeto PHP OO",
     "authors": [
         {
-            "name": "Danilo Joaquim",
-            "email": "contato@danilojoaquim.com.br"
+            "name": "Cesar Szpak",
+            "email": "cesar@celke.com.br"
         }
     ],
     "autoload": {

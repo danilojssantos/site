@@ -13,9 +13,17 @@ if (isset($this->Dados['form'][0])) {
             <div class="mr-auto p-2">
                 <h2 class="display-4 titulo">Editar Usuário</h2>
             </div>
-            <div class="p-2">
-                <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $valorForm['id']; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
-            </div>
+
+            <?php
+            if ($this->Dados['botao']['vis_usuario']) {
+                ?>
+                <div class="p-2">
+                    <a href="<?php echo URLADM . 'ver-usuario/ver-usuario/' . $valorForm['id']; ?>" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                </div>
+                <?php
+            }
+            ?>
+
         </div><hr>
         <?php
         if (isset($_SESSION['msg'])) {
@@ -73,11 +81,11 @@ if (isset($this->Dados['form'][0])) {
                         <?php
                         foreach ($this->Dados['select']['nivac'] as $nivac) {
                             extract($nivac);
-                            if($valorForm['adms_niveis_acesso_id'] == $id_nivac){
+                            if ($valorForm['adms_niveis_acesso_id'] == $id_nivac) {
                                 echo "<option value='$id_nivac' selected>$nome_nivac</option>";
-                            }else{
+                            } else {
                                 echo "<option value='$id_nivac'>$nome_nivac</option>";
-                            }                            
+                            }
                         }
                         ?>
                     </select>
@@ -89,11 +97,11 @@ if (isset($this->Dados['form'][0])) {
                         <?php
                         foreach ($this->Dados['select']['sit'] as $sit) {
                             extract($sit);
-                            if($valorForm['adms_sits_usuario_id'] == $id_sit){
+                            if ($valorForm['adms_sits_usuario_id'] == $id_sit) {
                                 echo "<option value='$id_sit' selected>$nome_sit</option>";
-                            }else{
+                            } else {
                                 echo "<option value='$id_sit'>$nome_sit</option>";
-                            }                            
+                            }
                         }
                         ?>
                     </select>

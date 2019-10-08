@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsAlterarSenha
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsAlterarSenha
 {
 
@@ -49,4 +53,3 @@ class AdmsAlterarSenha
     }
 
 }
-

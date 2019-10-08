@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsUploadImg
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsUploadImg
 {
     private $DadosImagem;
@@ -67,4 +71,3 @@ class AdmsUploadImg
         }
     }
 }
-

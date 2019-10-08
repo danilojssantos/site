@@ -7,11 +7,14 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsSlug
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsSlug
 {
-
-private $Nome;
+    private $Nome;
 private $Formato;
 
     public function nomeSlug($Nome)

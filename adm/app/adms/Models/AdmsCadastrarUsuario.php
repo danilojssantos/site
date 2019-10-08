@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsEditarUsuario
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsCadastrarUsuario
 {
 
@@ -15,7 +19,6 @@ class AdmsCadastrarUsuario
     private $Dados;
     private $DadosId;
     private $Foto;
-    private $ImgAntiga;
 
     function getResultado()
     {
@@ -108,7 +111,8 @@ class AdmsCadastrarUsuario
     public function listarCadastrar()
     {
         $listar = new \App\adms\Models\helper\AdmsRead();
-        $listar->fullRead("SELECT id id_nivac, nome nome_nivac FROM adms_niveis_acessos ORDER BY nome ASC");
+        $listar->fullRead("SELECT id id_nivac, nome nome_nivac FROM adms_niveis_acessos WHERE ordem >=:ordem ORDER BY nome ASC", "ordem=" . $_SESSION['ordem_nivac']);
+        
         $registro['nivac'] = $listar->getResultado();
 
         $listar->fullRead("SELECT id id_sit, nome nome_sit FROM adms_sits_usuarios ORDER BY nome ASC");

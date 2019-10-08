@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of AdmsCampoVazio
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class AdmsCampoVazio
 {
 
