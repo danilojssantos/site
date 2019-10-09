@@ -31,6 +31,7 @@ class AdmsApagarNivAc
             $apagarNivAc->exeDelete("adms_niveis_acessos", "WHERE id =:id", "id={$this->DadosId}");
             if ($apagarNivAc->getResultado()) {
                 $this->atualizarOrdem();
+                $this->apagarNivAcPg();
                 $_SESSION['msg'] = "<div class='alert alert-success'>Nível de acesso apagado com sucesso!</div>";
                 $this->Resultado = true;
             } else {
@@ -71,6 +72,12 @@ class AdmsApagarNivAc
                 $upAltNivAc->exeUpdate("adms_niveis_acessos", $this->Dados, "WHERE id =:id", "id=" . $id);
             }
         }
+    }
+
+    private function apagarNivAcPg()
+    {
+        $apagarNivAcPg = new \App\adms\Models\helper\AdmsDelete();
+        $apagarNivAcPg->exeDelete("adms_nivacs_pgs", "WHERE adms_niveis_acesso_id =:adms_niveis_acesso_id", "adms_niveis_acesso_id={$this->DadosId}");
     }
 
 }

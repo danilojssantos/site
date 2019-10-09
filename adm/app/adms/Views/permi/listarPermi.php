@@ -133,6 +133,9 @@ if (!defined('URL')) {
                                         }
                                     }
                                     $qnt_linhas_exe++;
+                                    if ($this->Dados['botao']['edit_niv_ac_pg_menu']) {
+                                        echo "<a href='" . URLADM . "editar-niv-ac-pg-menu/edit-niv-ac-pg-menu/$id?niv={$this->Dados['dados_nivac'][0]['id']}&pg={$this->Dados['pg']}' class='btn btn-outline-warning btn-sm'>Editar</a> ";
+                                    }
 
                                     ?>
                                 </span>                                

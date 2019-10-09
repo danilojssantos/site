@@ -28,7 +28,8 @@ class Permissoes
             'lib_permi' => ['menu_controller' => 'lib-permi', 'menu_metodo' => 'lib-permi'],
             'lib_menu' => ['menu_controller' => 'lib-menu', 'menu_metodo' => 'lib-menu'],
             'lib_dropdown' => ['menu_controller' => 'lib-dropdown', 'menu_metodo' => 'lib-dropdown'],
-            'ordem_menu' => ['menu_controller' => 'alt-ordem-menu', 'menu_metodo' => 'alt-ordem-menu']];
+            'ordem_menu' => ['menu_controller' => 'alt-ordem-menu', 'menu_metodo' => 'alt-ordem-menu'],
+            'edit_niv_ac_pg_menu' => ['menu_controller' => 'editar-niv-ac-pg-menu', 'menu_metodo' => 'edit-niv-ac-pg-menu']];
         $listarBotao = new \App\adms\Models\AdmsBotao();
         $this->Dados['botao'] = $listarBotao->valBotao($botao);
         
