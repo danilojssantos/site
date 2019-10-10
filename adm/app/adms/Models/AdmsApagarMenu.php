@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsApagarMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsApagarMenu
 {
 

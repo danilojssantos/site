@@ -12,4 +12,4 @@ define('METODO', 'index');
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');
-define('DBNAME', 'danilo');
+define('DBNAME', 'danilo2');

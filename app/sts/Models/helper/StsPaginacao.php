@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsPaginacao
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class StsPaginacao
 {
 

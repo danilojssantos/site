@@ -2,11 +2,7 @@
 
 namespace Core;
 
-/**
- * Description of ConfigView
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class ConfigView
 {
 

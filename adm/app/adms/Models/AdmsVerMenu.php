@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of AdmsVerMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class AdmsVerMenu
 {
     private $Resultado;

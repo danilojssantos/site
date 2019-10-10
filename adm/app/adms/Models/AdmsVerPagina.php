@@ -13,10 +13,7 @@ class AdmsVerPagina
     private $Resultado;
     private $DadosId;
     
-    /**
-     * <b>Ver Página:</b> Receber o id da página para buscar informações do registro no banco de dados
-     * @param int $DadosId
-     */
+   
     public function verPagina($DadosId)
     {
         $this->DadosId = (int) $DadosId;
