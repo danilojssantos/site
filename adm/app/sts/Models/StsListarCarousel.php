@@ -13,7 +13,7 @@ class StsListarCarousel
 
     private $Resultado;
     private $PageId;
-    private $LimiteResultado = 40;
+    private $LimiteResultado = 10;
     private $ResultadoPg;
     
     function getResultadoPg()
@@ -31,13 +31,13 @@ class StsListarCarousel
         $this->ResultadoPg = $paginacao->getResultado();
                
         $listarCarousel = new \App\adms\Models\helper\AdmsRead();
-        $listarCarousel->fullRead("SELECT car.id, car.nome, car.imagem, car.link,
+        $listarCarousel->fullRead("SELECT car.id, car.nome, car.imagem, car.link, car.ordem,
                 sit.nome nome_sit,
                 cr.cor cor_cr
                 FROM sts_carousels car 
                 INNER JOIN adms_sits sit ON sit.id=car.adms_sit_id
                 INNER JOIN adms_cors cr ON cr.id=sit.adms_cor_id
-                ORDER BY ordem DESC LIMIT :limit OFFSET :offset", "limit={$this->LimiteResultado}&offset={$paginacao->getOffset()}");
+                ORDER BY ordem ASC LIMIT :limit OFFSET :offset", "limit={$this->LimiteResultado}&offset={$paginacao->getOffset()}");
         $this->Resultado = $listarCarousel->getResultado();
         return $this->Resultado;
     }
