@@ -61,7 +61,7 @@ if (!defined('URL')) {
                 <div class="card text-center anim_left">
                     <div class="icon-row tamanh-icone">
                         <span class="step size-96 text-danger">
-                            <i class="icon <?php echo $icone_um; ?>"></i>
+                            <i class=" <?php echo $icone_um; ?>"></i>
                         </span>
                     </div>
                     <div class="card-body">
