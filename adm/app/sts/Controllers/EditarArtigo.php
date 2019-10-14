@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of EditarArtigo
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class EditarArtigo
 {
 
