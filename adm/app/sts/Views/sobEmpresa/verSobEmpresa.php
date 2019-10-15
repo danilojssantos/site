@@ -96,7 +96,7 @@ if (!empty($this->Dados['dados_SobEmpresa'][0])) {
     </div>
     <?php
 } else {
-    $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Slide de carousel não encontrado!</div>";
-    $UrlDestino = URLADM . 'carousel/listar';
+    $_SESSION['msg'] = "<div class='alert alert-danger'>Erro: Tópico sobre empresa não encontrado!</div>";
+    $UrlDestino = URLADM . 'sob-empresa/listar';
     header("Location: $UrlDestino");
 }

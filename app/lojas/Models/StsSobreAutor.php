@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsSobreAutor
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsSobreAutor
 {
     private $Resultado;

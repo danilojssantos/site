@@ -36,7 +36,7 @@ if (!defined('URL')) {
                             ?>
                         </nav>
                         <?php
-                    }else{
+                    } else {
                         echo "<div class='alert alert-danger'>Erro: Artigo não encontrado!</div>";
                     }
                     ?>      
@@ -74,8 +74,72 @@ if (!defined('URL')) {
                             }
                             ?>
                         </ol>
-                    </div>
+                    </div>                        
                 </aside>
+                <div class='col-md-8 blog-main'>
+                    <span id="msg_comentario"></span>
+                    <?php
+                    if(isset($_SESSION['msg'])){
+                        echo $_SESSION['msg'];
+                        unset($_SESSION['msg']);
+                    }
+                    if (!empty($this->Dados['sts_artigos'][0])) {
+                        ?>
+                        <h3>Participe da discussão</h3>
+                        <form method="POST" action="<?php echo URL; ?>comentario/index">
+                            <input type="hidden" name="sts_artigo_id" value="<?php echo $this->Dados['sts_artigos'][0]['id']; ?>">
+                            <input type="hidden" name="slug" value="<?php echo $this->Dados['sts_artigos'][0]['slug']; ?>">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Nome <span class="text-danger">*</span></label>                               
+                                <div class="col-sm-10">
+                                    <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome completo" value="<?php if(isset($_SESSION['form']['nome'])){echo $_SESSION['form']['nome']; } ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Apelido <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="apelido" class="form-control" id="apelido" placeholder="Apelido a ser apresentado no comentário" value="<?php if(isset($_SESSION['form']['apelido'])){echo $_SESSION['form']['apelido']; } ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">E-mail<span class="text-danger"> *</span></label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Seu melhor e-mail" value="<?php if(isset($_SESSION['form']['email'])){echo $_SESSION['form']['email']; } ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="conteudo" class="col-sm-2 col-form-label">Conteúdo<span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="conteudo" id="conteudo" rows="3"><?php if(isset($_SESSION['form']['conteudo'])){echo $_SESSION['form']['conteudo']; } ?></textarea>
+                                </div>
+                            </div>
+                            <p>
+                                <span class="text-danger">* </span>Campo obrigatório
+                            </p>
+                            <input name="CadComent" type="submit" class="btn btn-warning" value="Cadastrar">
+                        </form>
+                        <hr>
+                        <?php
+                    }
+                    if (!empty($this->Dados['sts_coment']['0'])) {
+                        foreach ($this->Dados['sts_coment'] as $comentario) {
+                            extract($comentario);
+                            echo "<div class='media'>";
+                            if (!empty($imagem_user)) {
+                                echo "<img class='mr-3' src='" . URLADM . "assets/imagens/usuario/$id_user/$imagem_user' alt='$apelido' width='50' height='50'>";
+                            } else {
+                                echo "<img class='mr-3' src='" . URLADM . "assets/imagens/usuario/icone_usuario.png' alt='$apelido' width='50' height='50'>";
+                            }
+                            echo "<div class='media-body'>";
+                            echo "<h6 class='mt-0'>" . $apelido . "</h6>";
+                            echo $conteudo . "<br><br>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    }
+                    ?>
+
+                </div>
             </div>
         </div>
     </div>					

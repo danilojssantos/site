@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsHome
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsCarousel
 {
 
@@ -27,4 +31,3 @@ class StsCarousel
     }
 
 }
-

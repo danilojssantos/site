@@ -18,7 +18,7 @@ class SobreEmpresa
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
 
-        $listarSeo = new \Sts\Models\StsSeo(); 
+        $listarSeo = new \Sts\Models\StsSeo();
         $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $listarSobEmp = new \Sts\Models\StsSobEmp();

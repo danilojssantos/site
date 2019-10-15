@@ -19,7 +19,7 @@ class Blog
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
 
-        $listarSeo = new \Sts\Models\StsSeo(); 
+        $listarSeo = new \Sts\Models\StsSeo();
         $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $this->PageId = filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);

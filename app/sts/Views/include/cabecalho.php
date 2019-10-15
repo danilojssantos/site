@@ -22,6 +22,8 @@
             echo "<meta property='og:description' content='$description'>";
             echo "<meta property='og:image' content='" . URL . "assets/imagens/$dir_img/$id/$imagem'>";
             echo "<meta property='og:type' content='website'>";
+            echo "<meta property='og:image:width' content='1200'>";
+            echo "<meta property='og:image:height' content='630'>";
             //https://developers.facebook.com/tools/debug/
 
             echo "<meta name='twitter:site' content='$twitter_site'>";
@@ -41,6 +43,5 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/ionicons.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>assets/css/personalizado.css">
-        <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/fontawesome.min.css'; ?>">
     </head>
     <body>

@@ -9,11 +9,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsCreate
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class StsCreate extends StsConn
 {
 

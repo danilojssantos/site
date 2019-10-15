@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsArtRecente
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsArtRecente
 {
 

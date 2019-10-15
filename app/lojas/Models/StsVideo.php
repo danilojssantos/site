@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsVideo
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsVideo
 {
     private $Resultado;

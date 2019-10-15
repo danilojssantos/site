@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsBlog
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsBlog
 {
 

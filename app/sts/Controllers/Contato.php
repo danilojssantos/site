@@ -31,7 +31,7 @@ class Contato
         $listarMenu = new \Sts\Models\StsMenu();
         $this->Dados['menu'] = $listarMenu->listarMenu();
 
-        $listarSeo = new \Sts\Models\StsSeo(); 
+        $listarSeo = new \Sts\Models\StsSeo();
         $this->Dados['seo'] = $listarSeo->listarSeo();
         
         $carregarView = new \Core\ConfigView('sts/Views/contato/contato', $this->Dados);

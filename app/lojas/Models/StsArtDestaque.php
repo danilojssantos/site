@@ -7,7 +7,11 @@ if (!defined('URL')) {
     exit();
 }
 
-
+/**
+ * Description of StsArtDestaque
+ *
+ * @copyright (c) year, Cesar Szpak - Celke
+ */
 class StsArtDestaque
 {
     private $Resultado;

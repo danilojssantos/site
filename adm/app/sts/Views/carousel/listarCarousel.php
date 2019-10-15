@@ -119,3 +119,9 @@ if (!defined('URL')) {
 
                 </tbody>
             </table>
+            <?php
+            echo $this->Dados['paginacao'];
+            ?>
+        </div>
+    </div>
+</div>

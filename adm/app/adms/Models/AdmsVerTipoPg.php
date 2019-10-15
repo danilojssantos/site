@@ -7,6 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
+
 class AdmsVerTipoPg
 {
     private $Resultado;

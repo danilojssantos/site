@@ -87,7 +87,7 @@ class ConfigController
 
     private function carregarMetodo()
     {
-      //  echo "<br><br><br>";
+       //echo "<br><br><br>";
         $classeCarregar = new $this->Classe;
         if (method_exists($classeCarregar, "index")) {
             if ($this->UrlParametro !== null) {

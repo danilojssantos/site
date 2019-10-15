@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of StsVerTipoPgSite
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class StsVerTipoPgSite
 {
     private $Resultado;

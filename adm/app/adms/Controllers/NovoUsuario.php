@@ -7,7 +7,6 @@ if (!defined('URL')) {
     exit();
 }
 
-
 class NovoUsuario
 {
 

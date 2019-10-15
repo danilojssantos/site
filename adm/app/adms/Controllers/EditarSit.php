@@ -8,7 +8,6 @@ if (!defined('URL')) {
 }
 
 
-
 class EditarSit {
 
     private $Dados;

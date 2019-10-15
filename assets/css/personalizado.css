@@ -138,8 +138,7 @@ html {
 .blog-text a{
 	text-decoration: none;
 }
-
-
-
-
-
+#msg_comentario{
+    position: absolute;
+    top: -80px;
+}

@@ -7,11 +7,7 @@ if (!defined('URL')) {
     exit();
 }
 
-/**
- * Description of EditarNivAcPgMenu
- *
- * @copyright (c) year, Cesar Szpak - Celke
- */
+
 class EditarNivAcPgMenu {
 
     private $Dados;
